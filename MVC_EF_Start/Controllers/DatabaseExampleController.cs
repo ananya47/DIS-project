@@ -34,7 +34,7 @@ namespace MVC_EF_Start.Controllers
       MyCompany.type = "ISM";
       MyCompany.iexId = "ISM";
 
-      Equity MyCompanyQuote1 = new Equity();
+      Quote MyCompanyQuote1 = new Quote();
       //MyCompanyQuote1.EquityId = 123;
       MyCompanyQuote1.date = "11-23-2018";
       MyCompanyQuote1.open = 46.13F;
@@ -50,7 +50,7 @@ namespace MVC_EF_Start.Controllers
       MyCompanyQuote1.changeOverTime = 0.56F;
       MyCompanyQuote1.symbol = "MCOB";
 
-      Equity MyCompanyQuote2 = new Equity();
+      Quote MyCompanyQuote2 = new Quote();
       //MyCompanyQuote1.EquityId = 123;
       MyCompanyQuote2.date = "11-23-2018";
       MyCompanyQuote2.open = 46.13F;
@@ -67,8 +67,8 @@ namespace MVC_EF_Start.Controllers
       MyCompanyQuote2.symbol = "MCOB";
 
       dbContext.Companies.Add(MyCompany);
-      dbContext.Equities.Add(MyCompanyQuote1);
-      dbContext.Equities.Add(MyCompanyQuote2);
+      dbContext.Quotes.Add(MyCompanyQuote1);
+      dbContext.Quotes.Add(MyCompanyQuote2);
 
       dbContext.SaveChanges();
       
@@ -78,7 +78,7 @@ namespace MVC_EF_Start.Controllers
                               .First();
 
       Company CompanyRead2 = dbContext.Companies
-                              .Include(c => c.Equities)
+                              .Include(c => c.Quotes)
                               .Where(c => c.symbol == "MCOB")
                               .First();
 

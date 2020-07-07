@@ -12,12 +12,12 @@ namespace MVC_EF_Start.Models
     public bool isEnabled { get; set; }
     public string type { get; set; }
     public string iexId { get; set; }
-    public List<Equity> Equities { get; set; }
+    public List<Quote> Quotes { get; set; }
   }
 
-  public class Equity
+  public class Quote
   {
-    public int EquityId { get; set; }
+    public int QuoteId { get; set; }
     public string date { get; set; }
     public float open { get; set; }
     public float high { get; set; }
@@ -35,6 +35,6 @@ namespace MVC_EF_Start.Models
 
   public class ChartRoot
   {
-    public Equity[] chart { get; set; }
+    public Quote[] chart { get; set; }
   }
 }
