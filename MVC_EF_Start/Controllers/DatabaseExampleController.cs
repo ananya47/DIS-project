@@ -89,10 +89,32 @@ namespace MVC_EF_Start.Controllers
       await dbContext.SaveChangesAsync();
       
       // DELETE operation
-      dbContext.Companies.Remove(CompanyRead1);
-      await dbContext.SaveChangesAsync();
+      //dbContext.Companies.Remove(CompanyRead1);
+      //await dbContext.SaveChangesAsync();
 
       return View();
     }
+
+    public ViewResult LINQOperations()
+    {
+      Company CompanyRead1 = dbContext.Companies
+                                      .Where(c => c.symbol == "MCOB")
+                                      .First();
+
+      Company CompanyRead2 = dbContext.Companies
+                                      .Include(c => c.Quotes)
+                                      .Where(c => c.symbol == "MCOB")
+                                      .First();
+
+      Quote Quote1 = dbContext.Companies
+                              .Include(c => c.Quotes)
+                              .Where(c => c.symbol == "MCOB")
+                              .FirstOrDefault()
+                              .Quotes
+                              .FirstOrDefault();
+
+      return View();
+    }
+
   }
 }
