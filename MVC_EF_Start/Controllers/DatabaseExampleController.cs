@@ -77,7 +77,7 @@ namespace MVC_EF_Start.Controllers
 
             //Table 2 - Patient records
             Patient PatRec1 = new Patient();
-            PatRec1.patientID = 1;
+           // PatRec1.patientID = 1;
             PatRec1.fname = "Ross";
             PatRec1.lname = "Geller";
             PatRec1.age = 43;
@@ -85,7 +85,7 @@ namespace MVC_EF_Start.Controllers
             PatRec1.mobile = 8135933431;
 
             Patient PatRec2 = new Patient();
-            PatRec2.patientID = 2;
+            //PatRec2.patientID = 2;
             PatRec2.fname = "Rachel";
             PatRec2.lname = "green";
             PatRec2.age = 41;
@@ -93,15 +93,15 @@ namespace MVC_EF_Start.Controllers
             PatRec2.mobile = 8135937432;
 
             Patient PatRec3 = new Patient();
-            PatRec3.patientID = 3;
+            //PatRec3.patientID = 3;
             PatRec3.fname = "Monica";
             PatRec3.lname = "Geller";
             PatRec3.age = 40;
             PatRec3.email = "geller@usf.edu";
             PatRec3.mobile = 8135931234;
-            
+
             Patient PatRec4 = new Patient();
-            PatRec4.patientID = 4;
+            //PatRec4.patientID = 4;
             PatRec4.fname = "Chandler";
             PatRec4.lname = "bing";
             PatRec4.age = 38;
@@ -109,7 +109,7 @@ namespace MVC_EF_Start.Controllers
             PatRec4.mobile = 8135937457;
 
             Patient PatRec5 = new Patient();
-            PatRec5.patientID = 5;
+           // PatRec5.patientID = 5;
             PatRec5.fname = "Mariah";
             PatRec5.lname = "Better Half";
             PatRec5.age = 41;
@@ -254,14 +254,14 @@ namespace MVC_EF_Start.Controllers
             Appt3.Prescription = Pres3;
 
             Appointment Appt4 = new Appointment();
-           // Appt4.appointmentID = 4;
+            // Appt4.appointmentID = 4;
             Appt4.apptdate = "30-10-2021";
             Appt4.Doctor = DocRec4;
             Appt4.Patient = PatRec4;
             Appt4.Prescription = Pres4;
 
             Appointment Appt5 = new Appointment();
-           // Appt5.appointmentID = 5;
+            // Appt5.appointmentID = 5;
             Appt5.apptdate = "15-11-2021";
             Appt5.Doctor = DocRec5;
             Appt5.Patient = PatRec5;
