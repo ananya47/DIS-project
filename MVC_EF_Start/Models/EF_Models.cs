@@ -3,38 +3,67 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC_EF_Start.Models
 {
-    public class Company
+  
+    //Assignment4 
+    public class Doctor
     {
-        public string Id { get; set; }
-        public string name { get; set; }
-        public string date { get; set; }
-        public bool isEnabled { get; set; }
-        public string type { get; set; }
-        public string iexId { get; set; }
-        public List<Quote> Quotes { get; set; }
+        [Key]
+        public int doctorID { get; set; } 
+        public string docFname { get; set; }
+        public string docLname { get; set; }
+        public int docAge { get; set; }
+        public string docEmail { get; set; }
+        public long docMobile { get; set; }
+        public List<Appointment> Appointments { get; set; }
     }
 
-    public class Quote
+    public class Patient
     {
-        public int Id { get; set; }
-        public string date { get; set; }
-        public float open { get; set; }
-        public float high { get; set; }
-        public float low { get; set; }
-        public float close { get; set; }
-        public int volume { get; set; }
-        public int unadjustedVolume { get; set; }
-        public float change { get; set; }
-        public float changePercent { get; set; }
-        public float vwap { get; set; }
-        public string label { get; set; }
-        public float changeOverTime { get; set; }
-        public string ClassDemo { get; set; }
-        public Company Company { get; set; }
+        [Key]
+        public int patientID { get; set; }
+        public string fname { get; set; }
+        public string lname { get; set; }
+        public int age { get; set; }
+        public string email { get; set; }
+        public long mobile { get; set; }
+        public List<Appointment> Appointments { get; set; }
     }
 
-    public class ChartRoot
+    public class Brand
     {
-        public Quote[] chart { get; set; }
+        [Key]
+        public int brandID { get; set; }
+        public string brandName { get; set; }
+        public List<Medicine> Medicine { get; set; }
+    }
+
+    public class Medicine
+    {
+        [Key]
+        public int medID { get; set; }
+        public string medName { get; set; }
+        public float price { get; set; }
+        public bool isRegulated { get; set; }
+        public Brand Brand { get; set; }
+    }
+
+    public class Prescription
+    {
+        [Key]
+        public int presID { get; set; }
+        public int presNumber { get; set; }
+        public List<Appointment> Appointments { get; set; }
+        public Medicine Medicine { get; set; }
+    }
+
+    public class Appointment
+    {
+        [Key]
+        public int appointmentID { get; set; }
+        public string apptdate  { get; set; }
+        public Doctor Doctor { get; set; }
+        public Patient Patient { get; set; }
+        public Prescription Prescription { get; set; }
+    
     }
 }

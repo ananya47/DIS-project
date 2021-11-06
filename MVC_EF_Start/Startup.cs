@@ -60,6 +60,7 @@ namespace MVC_EF_Start
                 routes.MapRoute(
               name: "default",
               template: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }
