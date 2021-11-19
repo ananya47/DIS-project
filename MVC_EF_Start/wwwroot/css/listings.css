@@ -1,0 +1,141 @@
+body {
+    background-color: black;
+    font-family: Verdana, sans-serif;
+}
+
+.backdropimg {
+    background-image: url("../img/back.jpg");
+    background-repeat: no-repeat;
+    background-attachment: static;
+    background-size: cover;
+    background-color: black;
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.tabledel {
+    border-collapse: collapse;
+    border: 1px solid black;
+    border-color: black;
+}
+
+.colformatdel {
+    text-align: center;
+    padding: 12px;
+}
+
+.trans {
+    background: rgba(209,250,250,0.6);
+}
+
+.icondel {
+    background-color: darkcyan;
+    color: white;
+    margin: 8px 4px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.buttoncancel {
+    align-self: center;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.buttonsave {
+    align-self: center;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.container {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.textareainput {
+    width: 20%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/*mobile*/
+@media only screen and (max-width: 600px) {
+    .tabledel {
+        width: 100%;
+        font-size: 11px;
+    }
+
+    .buttoncancel {
+        margin-left: 150px;
+        margin-top: 10px;
+    }
+
+    .buttonsave {
+        margin-left: 150px;
+        margin-top: 0;
+    }
+}
+
+/*tablet*/
+@media only screen and (min-width: 768px) {
+    .buttoncancel {
+        margin-left: 100px;
+    }
+
+    .buttonsave {
+        margin-inline: auto;
+        margin-right: -200px;
+        margin-left: 250px;
+    }
+}
+
+/*laptop*/
+@media only screen and (min-width: 992px) {
+    .backdropimg {
+        height: 50vw;
+    }
+
+    .tabledel {
+        width: 50%;
+        height: auto;
+    }
+
+    .buttoncancel {
+        margin-left: 400px;
+    }
+}

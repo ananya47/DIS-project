@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ListingsModifyPage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/listings.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container-wrapper">
+        <div class="brand-labling">
+            <img src="../img/boat.png" />
+            <span>RENT-A-bOAT</span>
+        </div>
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="searchpage.html">Search</a></li>
+                    <li>
+                        <a href="#">Manage Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a href="listingadd.html">Add</a></li>
+                            <li><a href="listingmodify.html">Modify</a></li>
+                            <li><a href="listingdelete.html">Delete</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="boatloc.html">Boat Locations</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="about_us.html">About Us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class=backdropimg>
+        <br><br><br>
+        <div class="container trans label">
+            <form action="/action_page.php">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cname">Company Name</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="cname" name="cname">
+                            <option value="gc">Grand Lady Cruises</option>
+                            <option value="da">Dutch Apple Cruises</option>
+                            <option value="am">Arrowhead Marina Rentals</option>
+                            <option value="lb">Low Bridge Charters</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="addr">Address</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="addr" name="addr" value="" style="height:100px"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="compurl">Company URL</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="adcompurl" name="compurl" value="http://www.grandlady.com">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="city">City</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="city" name="city">
+                            <option value="bf">Buffalo</option>
+                            <option value="cl">Cleveland</option>
+                            <option value="or">Orwell</option>
+                            <option value="al">Albany</option>
+                            <option value="wl">Waterloo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="state">State</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="state" name="state">
+                            <option value="ny">New York</option>
+                            <option value="mi">Mississippi</option>
+                            <option value="vt">Vermont</option>
+                            <option value="ri">Rhode Island</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="zip">Zip Code</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="zip" name="zip" value="14207">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="ph">Phone Number</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="ph" name="ph" value="(716) 824-5239">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="bname">Boat Name/Vessel Type</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="bname" name="bname" value="Grand Lady">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="crut">Cruise Type</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="crut" name="crut" value="Tours, lunch/dinner cruises, charters">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="hp">Home Port</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="hp" name="hp" value="Buffalo">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="ww">Waterways</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="ww" name="ww" value="Upper Niagara River">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="loc">Location</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="loc" name="loc" value="" style="height:100px"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button class="w3-button w3-teal buttonsave">SAVE</button>
+        <button class="w3-button w3-teal buttoncancel">CANCEL</button>
+    </div>
+
+</body>
+</html>

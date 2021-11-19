@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='css/searchpagestyle.css' />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="container-wrapper">
+        <div class="brand-labling">
+            <img src="../img/boat.png" />
+            <span>RENT-A-bOAT</span>
+        </div>
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="searchpage.html">Search</a></li>
+                    <li>
+                        <a href="#">Manage Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a href="listingadd.html">Add</a></li>
+                            <li><a href="listingmodify.html">Modify</a></li>
+                            <li><a href="listingdelete.html">Delete</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="boatloc.html">Boat Locations</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="about_us.html">About Us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class=backdropimg>
+        <br><br><br>
+        <header>
+            <div class='headerdiv'>
+                <h1>List of companies listing boats for hire</h1>
+            </div>
+        </header>
+
+        <div class='divone'>
+            <form>
+                <h3>Provide Your Search Criteria Below</h3>
+                <br>
+                <input type="text" name="field2" class="field-style field-split align-left" placeholder="State" />
+                <input type="text" name="field3" class="field-style field-split align-right" placeholder="City" />
+                <input type="text" name="field3" class="field-style field-split align-right" placeholder="Vessel Type" />
+                <input type="text" name="field3" class="field-style field-split align-right" placeholder="Water ways" />
+            </form>
+            <br>
+            <button class="w3-button w3-teal buttonsave">SEARCH</button>
+        </div>
+        <br>
+        <div class='divtwo'>
+            <div style="overflow-x: auto;">
+                <table class="gridtable">
+                    <tr>
+                        <th>Company</th>
+                        <th>Address</th>
+                        <th>Company Website</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>Phone number</th>
+                        <th>Vessel Types</th>
+                        <th>Water ways</th>
+                    </tr>
+                    <tr>
+                        <td>WNY Classic Cruises</td>
+                        <td>1 Dann Street</td>
+                        <td>http://www.wnyclassiccruises.com/</td>
+                        <td>Buffalo</td>
+                        <td>NY</td>
+                        <td>14207</td>
+                        <td>(716) 946-7246</td>
+                        <td>Summer Love</td>
+                        <td>Buffalo</td>
+                    </tr>
+                    <tr>
+                        <td>Grand Lady Cruises</td>
+                        <td>P.O. Box 746</td>
+                        <td>http://www.grandlady.com</td>
+                        <td>Buffalo	NY</td>
+                        <td>NY</td>
+                        <td>14207</td>
+                        <td>(716) 824-5239</td>
+                        <td>Canoes & kayaks, fishing boats</td>
+                        <td>Buffalo</td>
+                    </tr>
+                    <tr>
+                        <td>Camillus Erie Canal Park</td>
+                        <td>5750 Devoe Rd	</td>
+                        <td>http://www.eriecanalcamillus.com</td>
+                        <td>Camillus	</td>
+                        <td>NY	</td>
+                        <td>13031	</td>
+                        <td>(315) 487-7895</td>
+                        <td>English-style narrowboats</td>
+                        <td>Camillus</td>
+                    </tr>
+                    <tr>
+                        <td>Dutch Apple Cruises	</td>
+                        <td>PO Box 395	</td>
+                        <td>http://www.dutchapplecruises.com</td>
+                        <td>Albany	</td>
+                        <td>NY	</td>
+                        <td>12201	</td>
+                        <td>(518) 463-0220</td>
+                        <td>Grand Lady</td>
+                        <td>Albany</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.image {
+	height: 400px;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.img-model {
+	height: 800px;
+	width: 100%;
+	align-content: center;
+}
