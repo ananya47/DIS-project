@@ -14,7 +14,8 @@ namespace MVC_EF_Start.Models
         public string type { get; set; }
         public string company { get; set; }
         public string street_address { get; set; }
-        //public Company_Url company_url { get; set; }
+
+        public Company_Url company_url { get; set; }
         public string city { get; set; }
         public string state { get; set; }
         public string zip { get; set; }
@@ -24,7 +25,7 @@ namespace MVC_EF_Start.Models
         public string waterways { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        //public Georeference georeference { get; set; }
+        public Georeference georeference { get; set; }
         public string cruise_type { get; set; }
         public Location_1 location_1 { get; set; }
         public string computed_region_yamh_8v7k { get; set; }
@@ -37,6 +38,17 @@ namespace MVC_EF_Start.Models
         public string longitude { get; set; }
         public string human_address { get; set; }
     }
+    public class Company_Url
+    {
+        public string url { get; set; }
+    }
+
+    public class Georeference
+    {
+        public string type { get; set; }
+        public float[] coordinates { get; set; }
+    }
+
 }
 
 
