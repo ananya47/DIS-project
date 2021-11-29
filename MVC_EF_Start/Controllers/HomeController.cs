@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using MVC_EF_Start.Models;
+using MVC_EF_Start.DataAccess;
+using MVC_EF_Start.Infrastructure;
 
 /*push test*/
 namespace MVC_EF_Start.Controllers
@@ -15,8 +17,13 @@ namespace MVC_EF_Start.Controllers
   public class HomeController : Controller
   {
 
+        public ApplicationDbContext dbContext;
 
-    HttpClient httpClient;
+        public HomeController(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
+        HttpClient httpClient;
 
         static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
         static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
@@ -33,8 +40,8 @@ namespace MVC_EF_Start.Controllers
             string BOAT_API_PATH = BASE_URL;
             string boatsData = "";
 
-            BoatDetail boats = null;
-
+            //BoatDetail boats = null;
+            List<Boat> boats= null;
             httpClient.BaseAddress = new Uri(BOAT_API_PATH);
             try
             {
@@ -48,8 +55,24 @@ namespace MVC_EF_Start.Controllers
                 if (!boatsData.Equals(""))
                 {
                     // JsonConvert is part of the NewtonSoft.Json Nuget package
-                    boats = JsonConvert.DeserializeObject<BoatDetail>(boatsData);
-                    //testing chnages purva
+                    //boats = JsonConvert.DeserializeObject<BoatDetail>(boatsData);
+                    boats = JsonConvert.DeserializeObject<List<Boat>>(boatsData);
+                    Console.WriteLine(boats);
+                    Console.WriteLine("Data displayed");
+                    // Console.Log(boat);
+
+                    boats.ForEach(p =>
+                    {
+                        Boat boat = new Boat()
+                        {
+                            type = p.type,
+                           // company = p.company,
+                           // street_address = p.street_address
+                        };
+                        dbContext.Boats_tab.Add(boat);
+                        dbContext.SaveChanges();
+                    });
+                    //DbParser.boatsParser(boats);
                 }
             }
             catch (Exception e)
@@ -57,10 +80,23 @@ namespace MVC_EF_Start.Controllers
                 // This is a useful place to insert a breakpoint and observe the error message
                 Console.WriteLine(e.Message);
             }
+         //   dbContext.SaveChanges();
+            return View(boats);
+            
 
-         return View(boats);
     }
-         // GET: CandidatesController/Details/5
 
-  }
+      
+        // GET: CandidatesController/Details/5
+
+        /* public IActionResult Delete(string cond)
+         {
+
+         }
+         public IActionResult Update(string cond)
+         {
+
+         }*/
+
+    }
 }

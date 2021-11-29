@@ -1,15 +1,103 @@
-﻿@{
-    Layout = null;
-}
-
+﻿<!--Your HTML code here-->
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
+
+
 <body>
-  <h2>Hello World!</h2>
+    <div class="container-wrapper">
+        <div class="brand-labling">
+            <img src="../img/boat.png" />
+            <span>RENT-A-bOAT</span>
+        </div>
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="searchpage.html">Search</a></li>
+                    <li>
+                        <a href="#">Manage Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a href="listingadd.html">Add</a></li>
+                            <li><a href="listingmodify.html">Modify</a></li>
+                            <li><a href="listingdelete.html">Delete</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="boatloc.html">Boat Locations</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="about_us.html">About Us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- Showcase -->
+
+    <div class="slide-wrapper">
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="../img/pic2.jpg" style="width:100%">
+                <div class="text-image1">
+                    Whether you’re planning a celebration or looking for a relaxing day, getting on the water
+                    is the perfect way. For drive-it-yourself rentals & captained experiences,
+                    RENT-A-bOAT is the easiest way to search and explore waters near NYC.
+                    Connect with boat owners to book online or list your boat to rent.
+                </div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="../img/pic4.jpg" style="width:100%">
+                <div class="text">Add Boat Listings</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="../img/pic3.jpg" style="width:100%">
+                <div class="text">Offering you best services</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+    <script>
+
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 4000); // Change image every 2 seconds
+        }
+    </script>
 </body>
 </html>
