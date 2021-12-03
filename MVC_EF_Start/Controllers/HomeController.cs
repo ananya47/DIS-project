@@ -27,13 +27,29 @@ namespace MVC_EF_Start.Controllers
 
         static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
         static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
-    
-    public IActionResult Index()
-    {
+        public ActionResult About_us()
+        {
+            return View();
+        }
+        public ActionResult Boatloc()
+        {
+            return View();
+        }
+        public ActionResult Search_page()
+        {
+            return View();
+        }
+        public ActionResult Stats()
+        {
+            return View();
+        }
+       
+        public IActionResult Index()
+        {
 
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Clear();
-        
+
             httpClient.DefaultRequestHeaders.Accept.Add(
                 new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -41,7 +57,7 @@ namespace MVC_EF_Start.Controllers
             string boatsData = "";
 
             //BoatDetail boats = null;
-            List<Boat> boats= null;
+            List<Boat> boats = new List<Boat>();
             httpClient.BaseAddress = new Uri(BOAT_API_PATH);
             try
             {
@@ -54,6 +70,7 @@ namespace MVC_EF_Start.Controllers
 
                 if (!boatsData.Equals(""))
                 {
+
                     // JsonConvert is part of the NewtonSoft.Json Nuget package
                     //boats = JsonConvert.DeserializeObject<BoatDetail>(boatsData);
                     boats = JsonConvert.DeserializeObject<List<Boat>>(boatsData);
@@ -61,18 +78,87 @@ namespace MVC_EF_Start.Controllers
                     Console.WriteLine("Data displayed");
                     // Console.Log(boat);
 
-                    boats.ForEach(p =>
+                    // var boats = dbContext.Boats_tab.ToList();
+                  /*  var companies = dbContext.Company_tab.ToList();
+                    var cities = dbContext.City_tab.ToList();
+                    var states = dbContext.State_tab.ToList();*/
+
+                    HashSet<string> state_track = new HashSet<string>();
+                    HashSet<string> company_track = new HashSet<string>();
+                    HashSet<string> city_track = new HashSet<string>();
+                    string type = null;
+                    string home_port = null;
+                    string vessel_types = null;
+                    string cruise_type = null;
+                    string city = null;
+                    string state = null;
+                    string company = null;
+                    string street_address = null;
+                    string company_url = null;
+                    int zip = 0;
+                    string phone_number = null;
+                    double latitude = 0.0;
+                    double longitude = 0.0;
+
+                    foreach (var x in boats)
                     {
-                        Boat boat = new Boat()
+
+                        // type= x[0]["type"].ToString();
+                        type = x.type;
+                        home_port = x.home_port;
+                        latitude = x.latitude;
+                        longitude = x.longitude;
+                        vessel_types = x.vessel_types;
+                        cruise_type = x.cruise_type;
+
+                        /*company = x.company1.company;
+                        street_address = x.company1.street_address;
+                        company_url = x.company1.company_url;
+                        zip = x.company1.zip;
+                        phone_number = x.company1.phone_number;*/
+
+                       // city = x.company.city;
+
+                        Boat obj = new Boat();
+                        obj.type = type;
+                        obj.home_port = home_port;
+                        obj.latitude = latitude;
+                        obj.longitude = longitude;
+                        obj.vessel_types = vessel_types;
+                        dbContext.Boats_tab.Add(obj);
+
+                        
+
+                        /*if (!company_track.Contains(company))
+                        {*/
+                            /*Company obj1 = new Company();
+                            obj1.company = company;
+                            company_track.Add(company);
+                            obj1.street_address = street_address;
+                            obj1.company_url = company_url;
+                            obj1.zip = zip;
+                            obj1.phone_number = phone_number;
+                            dbContext.Company_tab.Add(obj1);*/
+                        
+                       /* if (!city_track.Contains(city))
                         {
-                            type = p.type,
-                           // company = p.company,
-                           // street_address = p.street_address
-                        };
-                        dbContext.Boats_tab.Add(boat);
-                        dbContext.SaveChanges();
-                    });
-                    //DbParser.boatsParser(boats);
+                            City obj2 = new City();
+                            city_track.Add(city);
+                            obj2.city = city;
+                        }
+                        if (!state_track.Contains(state))
+                        {
+                            State obj3 = new State();
+                            state_track.Add(state);
+                            obj3.state = state;
+
+                        }*/
+
+
+
+                    }
+                    dbContext.SaveChanges();
+
                 }
             }
             catch (Exception e)
@@ -80,23 +166,12 @@ namespace MVC_EF_Start.Controllers
                 // This is a useful place to insert a breakpoint and observe the error message
                 Console.WriteLine(e.Message);
             }
-         //   dbContext.SaveChanges();
+            //   dbContext.SaveChanges();
+        
             return View(boats);
+        }
             
 
     }
 
-      
-        // GET: CandidatesController/Details/5
-
-        /* public IActionResult Delete(string cond)
-         {
-
-         }
-         public IActionResult Update(string cond)
-         {
-
-         }*/
-
     }
-}

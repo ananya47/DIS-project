@@ -16,6 +16,10 @@ namespace MVC_EF_Start.Models
         public string vessel_types { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
+        public string cruise_type { get; set; }
+
+        public Company company1 { get; set; }
+
 
     }
     public class Company
@@ -29,6 +33,7 @@ namespace MVC_EF_Start.Models
         public int zip { get; set; }
         public string phone_number { get; set; }
         public List <Boat> Boats { get; set; }
+        public City city { get; set; }
     }
     public class City
     {
@@ -36,6 +41,7 @@ namespace MVC_EF_Start.Models
         public int city_id { get; set; }
         public string city { get; set; }
         public List<Company> Companies { get; set; }
+        public State state { get; set; }
     }
     public class State
     {
@@ -44,6 +50,7 @@ namespace MVC_EF_Start.Models
         public string state { get; set; }
        // public string state_name { get; set; }
         public List<City> Cities { get; set; }
+
     }
 
     
