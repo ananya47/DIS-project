@@ -28,12 +28,12 @@
                     <li>
                         <a href="#">Manage Listings &#9662;</a>
                         <ul class="dropdown">
-                            <li><a href="listingadd.html">Add</a></li>
-                            <li><a href="listingmodify.html">Modify</a></li>
-                            <li><a href="listingdelete.html">Delete</a></li>
+                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_add">Add</a></li>
+                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_modify">Modify</a></li>
+                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_delete">Delete</a></li>
                         </ul>
                     </li>
-                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Map</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Loaction</a></li>
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
                     
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>

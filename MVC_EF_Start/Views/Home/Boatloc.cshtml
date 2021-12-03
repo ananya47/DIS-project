@@ -4,39 +4,40 @@
     <title>Boat Locations</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/listings.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/listings.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/boatloc.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/boatloc.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/style.css" />
 
 </head>
 <body>
     <!-- Navbar -->
     <div class="container-wrapper">
         <div class="brand-labling">
-            <img src="../img/boat.png" />
+            <img src="~/img/boat.png" />
             <span>RENT-A-bOAT</span>
         </div>
         <!-- Navbar -->
         <div class="top-menu-wrapper">
             <div class="list-menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="searchpage.html">Search</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Search_page">Search</a></li>
                     <li>
                         <a href="#">Manage Listings &#9662;</a>
                         <ul class="dropdown">
-                            <li><a href="listingadd.html">Add</a></li>
-                            <li><a href="listingmodify.html">Modify</a></li>
-                            <li><a href="listingdelete.html">Delete</a></li>
+                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_add">Add</a></li>
+                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_modify">Modify</a></li>
+                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_delete">Delete</a></li>
                         </ul>
                     </li>
-                    <li><a href="boatloc.html">Boat Locations</a></li>
-                    <li><a href="stats.html">Stats</a></li>
-                    <li><a href="about_us.html">About Us</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Loaction</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
+
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>
                 </ul>
             </div>
 

@@ -27,6 +27,22 @@ namespace MVC_EF_Start.Controllers
 
         static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
         static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
+
+        public ActionResult Listing_add()
+        {
+            return View();
+        }
+
+        public ActionResult Listing_delete()
+        {
+            return View();
+        }
+
+        public ActionResult Listing_modify()
+        {
+            return View();
+        }
+
         public ActionResult About_us()
         {
             return View();
@@ -86,6 +102,7 @@ namespace MVC_EF_Start.Controllers
                     HashSet<string> state_track = new HashSet<string>();
                     HashSet<string> company_track = new HashSet<string>();
                     HashSet<string> city_track = new HashSet<string>();
+
                     string type = null;
                     string home_port = null;
                     string vessel_types = null;
