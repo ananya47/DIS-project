@@ -7,26 +7,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVC_EF_Start.Models
 {
-
-    public class Boat
+    public class State
     {
         [Key]
-        public int boat_id { get; set; }
-        public string home_port { get; set; }
-        public string type { get; set; }
-        public string vessel_types { get; set; }
-        public string latitude { get; set; }
-        public string longitude { get; set; }
-        public string cruise_type { get; set; }
+        public int state_id { get; set; }
+        public string state { get; set; }
+        // public string state_name { get; set; }
+        public List<City> City { get; set; }
 
-        //public string city { get; set; }
+        // public List<Company> Companies { get; set; }
+    }
 
-        [ForeignKey("Company")]
-        public int company_id_fk { get; set; }
+    public class City
+    {
+        [Key]
+        public int city_id { get; set; }
+        public string city { get; set; }
+        public List<Company> Company { get; set; }
 
-        public Company Company { get; set; }
-
-
+       
+        public State State { get; set; }
     }
     public class Company
     {
@@ -40,35 +40,27 @@ namespace MVC_EF_Start.Models
         public string phone_number { get; set; }
         public List<Boat> Boat { get; set; }
 
-        [ForeignKey("City")]
-        public int city_id_fk { get; set; }
+    
         public City City { get; set; }
 
-       // [ForeignKey("state_id")]
-       // public State State { get; set; }
     }
-    public class City
+
+    public class Boat
     {
         [Key]
-        public int city_id { get; set; }
-        public string city { get; set; }
-        public List<Company> Company { get; set; }
+        public int boat_id { get; set; }
+        public string home_port { get; set; }
+        public string type { get; set; }
+        public string vessel_types { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public string cruise_type { get; set; }
 
-        [ForeignKey("State")]
-        public int state_id_fk { get; set; }
-        public State State { get; set; }
+        public Company Company { get; set; }
     }
-    public class State
-    {
-        [Key]
-        public int state_id { get; set; }
-        public string state { get; set; }
-        // public string state_name { get; set; }
-        public List<City> City { get; set; }
-
-       // public List<Company> Companies { get; set; }
-
-    }
+   
+    
+   
 
     public class ChartModel
     {
