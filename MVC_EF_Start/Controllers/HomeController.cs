@@ -185,6 +185,9 @@ namespace MVC_EF_Start.Controllers
                         obj.vessel_types = vessel_types;
                         dbContext.Boats_tab.Add(obj);
 
+                        //ChartModel obj4 = new ChartModel();
+                       // obj4.Labels = home_port;
+                        //obj4.Data=
                         dbContext.SaveChanges();
 
                     }
@@ -192,6 +195,9 @@ namespace MVC_EF_Start.Controllers
                 
 
                 }
+
+
+              
 
 
             }

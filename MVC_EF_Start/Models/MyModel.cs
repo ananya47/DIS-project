@@ -55,7 +55,6 @@ namespace MVC_EF_Start.Models
         public string latitude { get; set; }
         public string longitude { get; set; }
         public string cruise_type { get; set; }
-
         public Company Company { get; set; }
     }
    
@@ -66,7 +65,7 @@ namespace MVC_EF_Start.Models
     {
         public string ChartType { get; set; }
         public string Labels { get; set; }
-        public int Data { get; set; }
+        public string Data { get; set; }
         public string Title { get; set; }
 
     }

@@ -59,7 +59,7 @@
         var barColors = ["cyan", "green", "blue", "orange", "brown", "purple", "pink"];
 
         new Chart("myChart", {
-            type: "bar",
+            type: '@Model.ChartType',
             data: {
                 labels: xValues,
                 datasets: [{
@@ -72,7 +72,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "Count of Companies Homeport wise",
+                    text: '@Model.Title',
 
                 },
                 scales: {
