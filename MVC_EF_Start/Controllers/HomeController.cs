@@ -146,7 +146,9 @@ namespace MVC_EF_Start.Controllers
                             obj3.state = state;
 
                             dbContext.State_tab.Add(obj3);
+                            dbContext.SaveChanges();
                         }
+                        
 
                         City obj2 = new City();
                         if (!city_track.Contains(city))
@@ -156,7 +158,9 @@ namespace MVC_EF_Start.Controllers
                             obj2.city = city;
                             // obj2.
                             dbContext.City_tab.Add(obj2);
+                            dbContext.SaveChanges();
                         }
+                        
 
                         Company obj1 = new Company();
                         if (!company_track.Contains(company))
@@ -169,7 +173,9 @@ namespace MVC_EF_Start.Controllers
                             obj1.zip = zip;
                             obj1.phone_number = phone_number;
                             dbContext.Company_tab.Add(obj1);
+                            dbContext.SaveChanges();
                         }
+                       
 
                         Boat obj = new Boat();
                         obj.type = type;
@@ -182,6 +188,7 @@ namespace MVC_EF_Start.Controllers
                         dbContext.SaveChanges();
 
                     }
+
                 
 
                 }
