@@ -62,6 +62,8 @@ namespace MVC_EF_Start
               template: "{controller=Home}/{action=Index}/{id?}");
 
             });
+
+
         }
     }
 }

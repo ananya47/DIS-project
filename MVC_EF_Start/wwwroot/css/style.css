@@ -30,7 +30,7 @@ img {
 
 .list-menu {
     overflow: visible;
-    height: 100%;
+    height: 50%;
     background: black;
 }
 
@@ -188,12 +188,12 @@ ul {
 .container-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 50%;
     align-items: center;
 }
 
 .top-menu-wrapper {
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: flex-end;
 }

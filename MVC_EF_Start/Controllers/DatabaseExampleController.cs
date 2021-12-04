@@ -21,7 +21,7 @@ namespace MVC_EF_Start.Controllers
 
         public IActionResult Index()
         {
-            var boats = dbContext.Boats_tab.ToList();
+            /*var boats = dbContext.Boats_tab.ToList();
             var companies= dbContext.Company_tab.ToList();
             var cities = dbContext.City_tab.ToList();
             var states = dbContext.State_tab.ToList();
@@ -60,8 +60,8 @@ namespace MVC_EF_Start.Controllers
                 }
 
                 dbContext.SaveChanges();
-            });
-            return View(boats);
+            });*/
+            return View();
         }
     }
     }

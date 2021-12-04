@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVC_EF_Start.Models
 {
@@ -14,11 +15,16 @@ namespace MVC_EF_Start.Models
         public string home_port { get; set; }
         public string type { get; set; }
         public string vessel_types { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
         public string cruise_type { get; set; }
 
-        public Company company1 { get; set; }
+        //public string city { get; set; }
+
+        [ForeignKey("Company")]
+        public int company_id_fk { get; set; }
+
+        public Company Company { get; set; }
 
 
     }
@@ -30,30 +36,49 @@ namespace MVC_EF_Start.Models
         public string company { get; set; }
         public string street_address { get; set; }
 
-        public int zip { get; set; }
+        public string zip { get; set; }
         public string phone_number { get; set; }
-        public List <Boat> Boats { get; set; }
-        public City city { get; set; }
+        public List<Boat> Boat { get; set; }
+
+        [ForeignKey("City")]
+        public int city_id_fk { get; set; }
+        public City City { get; set; }
+
+       // [ForeignKey("state_id")]
+       // public State State { get; set; }
     }
     public class City
     {
         [Key]
         public int city_id { get; set; }
         public string city { get; set; }
-        public List<Company> Companies { get; set; }
-        public State state { get; set; }
+        public List<Company> Company { get; set; }
+
+        [ForeignKey("State")]
+        public int state_id_fk { get; set; }
+        public State State { get; set; }
     }
     public class State
     {
         [Key]
         public int state_id { get; set; }
         public string state { get; set; }
-       // public string state_name { get; set; }
-        public List<City> Cities { get; set; }
+        // public string state_name { get; set; }
+        public List<City> City { get; set; }
+
+       // public List<Company> Companies { get; set; }
 
     }
 
-    
+    public class ChartModel
+    {
+        public string ChartType { get; set; }
+        public string Labels { get; set; }
+        public int Data { get; set; }
+        public string Title { get; set; }
+
+    }
+
     /*public class Boats
     {
         public BoatDetail[] Property1 { get; set; }
@@ -91,20 +116,58 @@ namespace MVC_EF_Start.Models
         public string longitude { get; set; }
         public string human_address { get; set; }
     }*/
-   /* public class Company_Url
-    {
-        [Key]
-        public int companyID { get; set; }
-        public string url { get; set; }
-    }*/
-    
+    /* public class Company_Url
+     {
+         [Key]
+         public int companyID { get; set; }
+         public string url { get; set; }
+     }*/
 
-   /* public class Georeference
+
+    /* public class Georeference
+     {
+         public string type { get; set; }
+         public float[] coordinates { get; set; }
+     }*/
+
+
+    public class Rootobject
+    {
+        public List<Class1> Property1 { get; set; }
+    }
+
+    public class Class1
+    {
+        public string type { get; set; }
+        public string company { get; set; }
+        public string street_address { get; set; }
+        public Company_Url company_url { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string zip { get; set; }
+        public string phone_number { get; set; }
+        public string vessel_types { get; set; }
+        public string cruise_type { get; set; }
+        public string home_port { get; set; }
+        public string waterways { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public Georeference georeference { get; set; }
+
+        public Rootobject Rootobject { get; set; }
+
+    }
+
+    public class Company_Url
+    {
+        public string url { get; set; }
+    }
+
+    public class Georeference
     {
         public string type { get; set; }
         public float[] coordinates { get; set; }
-    }*/
-
+    }
 }
 
 
