@@ -14,8 +14,8 @@ using MVC_EF_Start.Infrastructure;
 /*push test*/
 namespace MVC_EF_Start.Controllers
 {
-  public class HomeController : Controller
-  {
+    public class HomeController : Controller
+    {
 
         public ApplicationDbContext dbContext;
 
@@ -27,6 +27,22 @@ namespace MVC_EF_Start.Controllers
 
         static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
         static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
+
+        public ActionResult Listing_add()
+        {
+            return View();
+        }
+
+        public ActionResult Listing_delete()
+        {
+            return View();
+        }
+
+        public ActionResult Listing_modify()
+        {
+            return View();
+        }
+
         public ActionResult About_us()
         {
             return View();
@@ -43,7 +59,7 @@ namespace MVC_EF_Start.Controllers
         {
             return View();
         }
-       
+
         public IActionResult Index()
         {
 
@@ -57,7 +73,7 @@ namespace MVC_EF_Start.Controllers
             string boatsData = "";
 
             //BoatDetail boats = null;
-            List<Boat> boats = new List<Boat>();
+            List<Class1> boats = new List<Class1>();
             httpClient.BaseAddress = new Uri(BOAT_API_PATH);
             try
             {
@@ -73,19 +89,22 @@ namespace MVC_EF_Start.Controllers
 
                     // JsonConvert is part of the NewtonSoft.Json Nuget package
                     //boats = JsonConvert.DeserializeObject<BoatDetail>(boatsData);
-                    boats = JsonConvert.DeserializeObject<List<Boat>>(boatsData);
+                    boats = JsonConvert.DeserializeObject<List<Class1>>(boatsData);
+
+                    //List<Class1> selectedCollection = selected.ToList();
                     Console.WriteLine(boats);
                     Console.WriteLine("Data displayed");
                     // Console.Log(boat);
 
                     // var boats = dbContext.Boats_tab.ToList();
-                  /*  var companies = dbContext.Company_tab.ToList();
-                    var cities = dbContext.City_tab.ToList();
-                    var states = dbContext.State_tab.ToList();*/
+                    /*  var companies = dbContext.Company_tab.ToList();
+                      var cities = dbContext.City_tab.ToList();
+                      var states = dbContext.State_tab.ToList();*/
 
                     HashSet<string> state_track = new HashSet<string>();
                     HashSet<string> company_track = new HashSet<string>();
                     HashSet<string> city_track = new HashSet<string>();
+
                     string type = null;
                     string home_port = null;
                     string vessel_types = null;
@@ -94,11 +113,11 @@ namespace MVC_EF_Start.Controllers
                     string state = null;
                     string company = null;
                     string street_address = null;
-                    string company_url = null;
-                    int zip = 0;
+                    string url = null;
+                    string zip = null;
                     string phone_number = null;
-                    double latitude = 0.0;
-                    double longitude = 0.0;
+                    string latitude = null;
+                    string longitude = null;
 
                     foreach (var x in boats)
                     {
@@ -111,13 +130,46 @@ namespace MVC_EF_Start.Controllers
                         vessel_types = x.vessel_types;
                         cruise_type = x.cruise_type;
 
-                        /*company = x.company1.company;
-                        street_address = x.company1.street_address;
-                        company_url = x.company1.company_url;
-                        zip = x.company1.zip;
-                        phone_number = x.company1.phone_number;*/
+                        company = x.company;
+                        street_address = x.street_address;
+                        url = x.company_url.url;
+                        zip = x.zip;
+                        phone_number = x.phone_number;
 
-                       // city = x.company.city;
+                        city = x.city;
+                        state = x.state;
+
+                        if (!state_track.Contains(state))
+                        {
+                            State obj3 = new State();
+                            state_track.Add(state);
+                            obj3.state = state;
+
+                            dbContext.State_tab.Add(obj3);
+                        }
+
+                        City obj2 = new City();
+                        if (!city_track.Contains(city))
+                        {
+
+                            city_track.Add(city);
+                            obj2.city = city;
+                            // obj2.
+                            dbContext.City_tab.Add(obj2);
+                        }
+
+                        Company obj1 = new Company();
+                        if (!company_track.Contains(company))
+                        {
+
+                            obj1.company = company;
+                            company_track.Add(company);
+                            obj1.street_address = street_address;
+                            obj1.company_url = url;
+                            obj1.zip = zip;
+                            obj1.phone_number = phone_number;
+                            dbContext.Company_tab.Add(obj1);
+                        }
 
                         Boat obj = new Boat();
                         obj.type = type;
@@ -127,39 +179,14 @@ namespace MVC_EF_Start.Controllers
                         obj.vessel_types = vessel_types;
                         dbContext.Boats_tab.Add(obj);
 
-                        
-
-                        /*if (!company_track.Contains(company))
-                        {*/
-                            /*Company obj1 = new Company();
-                            obj1.company = company;
-                            company_track.Add(company);
-                            obj1.street_address = street_address;
-                            obj1.company_url = company_url;
-                            obj1.zip = zip;
-                            obj1.phone_number = phone_number;
-                            dbContext.Company_tab.Add(obj1);*/
-                        
-                       /* if (!city_track.Contains(city))
-                        {
-                            City obj2 = new City();
-                            city_track.Add(city);
-                            obj2.city = city;
-                        }
-                        if (!state_track.Contains(state))
-                        {
-                            State obj3 = new State();
-                            state_track.Add(state);
-                            obj3.state = state;
-
-                        }*/
-
-
+                        dbContext.SaveChanges();
 
                     }
-                    dbContext.SaveChanges();
+                
 
                 }
+
+
             }
             catch (Exception e)
             {
@@ -167,11 +194,11 @@ namespace MVC_EF_Start.Controllers
                 Console.WriteLine(e.Message);
             }
             //   dbContext.SaveChanges();
-        
+
             return View(boats);
         }
-            
+
 
     }
 
-    }
+}
