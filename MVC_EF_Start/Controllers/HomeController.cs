@@ -186,6 +186,10 @@ namespace MVC_EF_Start.Controllers
 
                 }
 
+                //for chart
+
+       
+
 
             }
             catch (Exception e)
