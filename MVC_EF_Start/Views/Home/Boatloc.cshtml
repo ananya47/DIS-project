@@ -27,11 +27,10 @@
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Search_page">Search</a></li>
                     <li>
-                        <a href="#">Manage Listings &#9662;</a>
+                        <a href="#">Listings &#9662;</a>
                         <ul class="dropdown">
-                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_add">Add</a></li>
-                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_modify">Modify</a></li>
-                            <li><a asp-area="" asp-controller="Listing" asp-action="Listing_delete">Delete</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Create">Add</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Listings">Manage</a></li>
                         </ul>
                     </li>
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Loaction</a></li>

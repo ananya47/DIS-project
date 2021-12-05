@@ -4,7 +4,7 @@ body {
 }
 
 .backdropimg {
-    background-image: url("../img/back.jpg");
+    background-image: url("~/img/back.jpg");
     background-repeat: no-repeat;
     background-attachment: static;
     background-size: cover;

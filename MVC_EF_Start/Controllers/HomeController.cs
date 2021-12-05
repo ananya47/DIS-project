@@ -18,54 +18,121 @@ namespace MVC_EF_Start.Controllers
     public class HomeController : Controller
     {
 
+        HttpClient httpClient = new HttpClient();
+
+        static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
+        static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
+
+
         public ApplicationDbContext dbContext;
 
         public HomeController(ApplicationDbContext context)
         {
             dbContext = context;
         }
-        HttpClient httpClient= new HttpClient();
 
-        static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
-        static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
-
-        public ActionResult Listing_add()
-        {
+        public IActionResult Index()
+        {   
             return View();
         }
 
-        public ActionResult Listing_delete()
+        //search page 
+        public IActionResult Search_page()
+        {
+            var result1 = dbContext.Company_tab.ToList();
+            return View(result1);
+        }
+
+        //create record 
+        public IActionResult Create()
         {
             return View();
         }
-     /*   [Route("Companies")]
-        public IActionResult Companies()
+        [HttpPost]
+        public async Task<IActionResult> Create(Company e)
         {
-
-            return View();
-        }*/
-
-    
-        public ActionResult Listing_modify()
-        {
-            return View();
+            if (ModelState.IsValid)
+            {
+                dbContext.Add(e);
+                await dbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(e);
         }
 
-        public ActionResult About_us()
+        //read records
+        public IActionResult Listings()
         {
-            return View();
+            return View(dbContext.Company_tab);
         }
+
+        //update records
+        public IActionResult Modify(int id)
+        {
+            return View(dbContext.Company_tab.Where(a => a.company_id == id).FirstOrDefault());
+        }
+        [HttpPost]
+        [ActionName("Modify")]
+        public IActionResult Modify_post(Company com)
+        {
+            dbContext.Company_tab.Update(com);
+            dbContext.SaveChanges();
+            return RedirectToAction("Listings");
+        }
+
+        //delete records
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var compdel = dbContext.Company_tab.Where(a => a.company_id == id).FirstOrDefault();
+            dbContext.Company_tab.Remove(compdel);
+            dbContext.SaveChanges();
+            return RedirectToAction("Listings");
+        }
+        //boat location details
         public ActionResult Boatloc()
         {
             return View();
         }
-        public IActionResult Search_page()
-        {
-            var result1 = dbContext.Company_tab.ToList();
 
-           
-            return View(result1);
+        //stats- chart page 
+        public ActionResult Stats()
+        {
+            string api_link = "https://data.ny.gov/resource/ibtm-q4dj.json";
+
+            httpClient.BaseAddress = new Uri(api_link);
+
+            HttpResponseMessage response = httpClient.GetAsync(api_link).GetAwaiter().GetResult();
+
+
+            var results = (from b in dbContext.Boats_tab
+                           group b by b.home_port into res
+                           select new
+                           {
+                               home_port = res.Key
+                           }).Take(5);
+
+            int[] label = new int[] { 1, 3, 4, 9, 2 };
+            List<int> labels = new List<int>(label);
+
+            List<string> ChartLabels = new List<string>();
+            ChartLabels = results.Select(p => p.home_port).ToList();
+            /*List<long> ChartData = new List<long>();
+            ChartData = results.Select(p => p.covid_19_deaths).ToList();*/
+            ViewBag.Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'"));
+            ViewBag.Data = String.Join(",", labels.Select(d => d));
+
+
+            return View();
         }
+
+        //about us page
+        public ActionResult About_us()
+        {
+            return View();
+        }
+        
+        
         /*[Route("Search_page")]
         public IActionResult Search_page(string search)
         {
@@ -100,131 +167,117 @@ namespace MVC_EF_Start.Controllers
             return View("Search_page");
             
         }*/
-        public ActionResult Stats()
-        {
-            string api_link = "https://data.ny.gov/resource/ibtm-q4dj.json";
-
-            httpClient.BaseAddress = new Uri(api_link);
-
-            HttpResponseMessage response = httpClient.GetAsync(api_link).GetAwaiter().GetResult();
-         
-
-            var results = (from b in dbContext.Boats_tab
-                           group b by b.home_port into res
-                           select new
-                           {
-                               home_port = res.Key
-                           }).Take(5);
-
-            int[] label = new int[] { 1, 3, 4, 9, 2 };
-            List<int> labels = new List<int>(label);
-
-            List<string> ChartLabels = new List<string>();
-            ChartLabels = results.Select(p => p.home_port).ToList();
-            /*List<long> ChartData = new List<long>();
-            ChartData = results.Select(p => p.covid_19_deaths).ToList();*/
-            ViewBag.Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'"));
-            ViewBag.Data = String.Join(",", labels.Select(d => d));
-
-
-            return View();
-        }
-        public IActionResult Create()
-        {
-
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(Company e)
-        {
-            if (ModelState.IsValid)
-            {
-                dbContext.Add(e);
-                await dbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(e);
-        }
-        public IActionResult Listings()
-        {
-            return View(dbContext.Company_tab);
-        }
-
-
-
-        public async Task<IActionResult> Modify(int id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var getcompdtls = await dbContext.Company_tab.FindAsync(id);
-            return View(getcompdtls);
-        }
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("Index");
-            }
-            var getResult = await dbContext.Company_tab.FindAsync(id);
-            return View(getResult);
-        }
         
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-
-            var getResult = await dbContext.Company_tab.FindAsync(id);
-            dbContext.Company_tab.Remove(getResult);
-            await dbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
-
-        }
-        public async Task<IActionResult> Details(int id)
-        {
-
-
-
-            var companyDetail = await dbContext.Company_tab
-                .FirstOrDefaultAsync(m => m.company_id == id);
-
-
-            if (companyDetail == null)
-            {
-                return NotFound();
-            }
-
-            return View();
-        }
         
-        public IActionResult Update(string cond)
+
+        // public IActionResult Delete()
+        //{
+        //    return View();
+        //}
+        public ActionResult Zipdetails(string zipid)
         {
+            return View(dbContext.Company_tab.Where(a => a.zip == zipid).ToList());
 
-            //fetch the records which match the given condition
-            var level = dbContext.Company_tab.Where(c => c.company == cond).First();
+            //var zipdtl = (from c in dbContext.Company_tab
+            //              where c.zip == zipid
+            //              select c.compName).ToArray();
+            //    //dbContext.Company_tab.Where(a => a.zip == zipid).Take(5);
+            //return View(zipdtl);
 
-            return View(level);
+            
+            ////string compName = null;
+            ////string compURL = null;
+            //List<string> zips = new List<string>();
+            //List<string> compName = new List<string>();
+            //List<string> compURL = new List<string>();
+            //zips = zipdtl.Select(p => p.zip).ToList();
+            //compName = zipdtl.Select(p => p.compName).ToList();
+            //compURL = zipdtl.Select(p => p.compName).ToList();
+            //ViewBag.zips = String.Join(",", zips.Select(d => "'" + d + "'"));
+            //ViewBag.compName = String.Join(",", compName.Select(d => "'" + d + "'"));
+            //ViewBag.compURL = String.Join(",", compURL.Select(d => "'" + d + "'"));
+
         }
+
+        //public async Task<IActionResult> Modify(int id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    var getcompdtls = await dbContext.Company_tab.FindAsync(id);
+        //    return View(getcompdtls);
+        //}
+        //[HttpPost]
+        ///*public async Task<IActionResult> Modify(Company nc)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        dbContext.Update(nc);
+        //        await dbContext.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(nc);
+        //}
+
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    var getResult = await dbContext.Company_tab.FindAsync(id);
+        //    return View(getResult);
+        //}
+
         [HttpPost]
-        public IActionResult UpdateRecord(Company data)
-        {
-            var exe = dbContext.Company_tab.FirstOrDefault(x => x.company_id == data.company_id);
+        //public async Task<IActionResult> Delete(int id)
+        //{
 
-            if (exe != null)
-            {
-                exe.street_address = data.street_address;
-                exe.company_url = data.company_url;
-                exe.phone_number = data.phone_number;
+        //    var getResult = await dbContext.Company_tab.FindAsync(id);
+        //    dbContext.Company_tab.Remove(getResult);
+        //    await dbContext.SaveChangesAsync();
+        //    return RedirectToAction("Index");
 
-                dbContext.SaveChanges();
-            }
+        //}
+        //public async Task<IActionResult> Details(int id)
+        //{
+        //    var companyDetail = await dbContext.Company_tab
+        //        .FirstOrDefaultAsync(m => m.company_id == id);
+        //    if (companyDetail == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View();
+        //}
+      
+        //public IActionResult Update(string cond)
+        //{
+
+        //    //fetch the records which match the given condition
+        //    var level = dbContext.Company_tab.Where(c => c.company == cond).First();
+
+        //    return View(level);
+        //}
+        //[HttpPost]
+        //public IActionResult UpdateRecord(Company data)
+        //{
+        //    var exe = dbContext.Company_tab.FirstOrDefault(x => x.company_id == data.company_id);
+
+        //    if (exe != null)
+        //    {
+        //        exe.street_address = data.street_address;
+        //        exe.company_url = data.company_url;
+        //        exe.phone_number = data.phone_number;
+
+        //        dbContext.SaveChanges();
+        //    }
 
 
 
-            return RedirectToAction("mean", new { val = exe.street_address });
-        }
+        //    return RedirectToAction("mean", new { val = exe.street_address });
+        //}
       /*  public IActionResult Delete(string cond)
         {
             var exe = dbContext.Company_tab.FirstOrDefault(x => x.company == cond);
@@ -239,7 +292,7 @@ namespace MVC_EF_Start.Controllers
 
             return RedirectToAction("mean", new { val = exe.street_address });
         }*/
-        public IActionResult Index()
+        public IActionResult InsertApi()
         {
 
             httpClient = new HttpClient();
@@ -376,13 +429,6 @@ namespace MVC_EF_Start.Controllers
 
                 }
 
-                //for chart
-
-       
-
-
-              
-
 
             }
             catch (Exception e)
@@ -393,6 +439,7 @@ namespace MVC_EF_Start.Controllers
             //   dbContext.SaveChanges();
 
             return View(boats);
+            
         }
 
 
