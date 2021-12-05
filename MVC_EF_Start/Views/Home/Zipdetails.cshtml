@@ -1,0 +1,25 @@
+﻿@model MVC_EF_Start.Models.Company
+
+@{
+    ViewBag.Title = "Zipdetails";
+}
+
+<h1>Zipdetails</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @foreach (var item in Model.zip)
+               
+                @Html.DisplayNameFor(model => model.company_url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.company)
+            </th>
+
+        </tr>
+    </thead>
+    s
+</table>

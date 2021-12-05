@@ -1,7 +1,6 @@
 ﻿
 @model IEnumerable<Company>
 
-
 @{
     var title = "READ Company";
     ViewData["Title"] = "Listings";
@@ -55,6 +54,7 @@
                     <th>phone_number</th>
                     <th>Update</th>
                     <th>Delete</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,20 +66,26 @@
                 {
                     @foreach (var p in Model)
                     {
-                        <tr>
-                            <td>@p.company_id</td>
-                            <td>@p.company_url</td>
-                            <td>@p.company</td>
-                            <td>@p.street_address</td>
-                            <td>@p.zip</td>
-                            <td>@p.phone_number</td>
-                            <td><a asp-action="Modify" asp-route-id="@p.company_id">Update</a></td>
-                            <td>
-                                <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
-                                    <button>Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+            <tr>
+                <td>@p.company_id</td>
+                <td>@p.company_url</td>
+                <td>@p.company</td>
+                <td>@p.street_address</td>
+                <td><a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a></td>
+                
+                <td>@p.phone_number</td>
+                <td><a asp-action="Modify" asp-route-id="@p.company_id">Edit</a></td>
+                <td>
+                    <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
+                        <button>Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Details" method="post" asp-route-id="@p.company_id">
+                        <button>Details</button>
+                    </form>
+                </td>
+            </tr>
 
                     }
                 }
