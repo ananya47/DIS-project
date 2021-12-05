@@ -124,7 +124,9 @@ img {
     }
 
     .container-wrapper {
-        flex-direction: row-reverse;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 
@@ -169,11 +171,12 @@ ul {
 
         ul li ul.dropdown li {
             display: block;
+            cursor: pointer;
         }
 
 .brand-labling {
     color: white;
-    width: 20%;
+    
     
 }
 
@@ -188,12 +191,11 @@ ul {
 .container-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    
     align-items: center;
 }
 
 .top-menu-wrapper {
-    width: 50%;
     display: flex;
     justify-content: flex-end;
 }

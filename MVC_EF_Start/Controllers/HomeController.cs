@@ -107,11 +107,7 @@ namespace MVC_EF_Start.Controllers
             httpClient.BaseAddress = new Uri(api_link);
 
             HttpResponseMessage response = httpClient.GetAsync(api_link).GetAwaiter().GetResult();
-            // DbDomain d = new DbDomain(_context);
-            /*if (d._context.Covid_Conditions_data.ToList().Count == 0)
-            {
-                d.covidConditionPost(covid_conditions);
-            }*/
+         
 
             var results = (from b in dbContext.Boats_tab
                            group b by b.home_port into res
@@ -148,6 +144,26 @@ namespace MVC_EF_Start.Controllers
                 return RedirectToAction("Index");
             }
             return View(e);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id==null)
+            {
+                return RedirectToAction("Index");
+            }
+            var getResult = await dbContext.Company_tab.FindAsync(id);
+            return View(getResult);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var getResult = await dbContext.Company_tab.FindAsync(id);
+            return View(getResult);
         }
         public IActionResult Update(string cond)
         {
