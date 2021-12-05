@@ -29,15 +29,15 @@ namespace MVC_EF_Start.Controllers
         static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
         static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
 
-        public ActionResult Listing_add()
-        {
-            return View();
-        }
+        //public ActionResult Listing_add()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult Listing_delete()
-        {
-            return View();
-        }
+        //public ActionResult Listing_delete()
+        //{
+        //    return View();
+        //}
      /*   [Route("Companies")]
         public IActionResult Companies()
         {
@@ -46,10 +46,10 @@ namespace MVC_EF_Start.Controllers
         }*/
 
     
-        public ActionResult Listing_modify()
-        {
-            return View();
-        }
+        //public ActionResult Listing_modify()
+        //{
+        //    return View();
+        //}
 
         public ActionResult About_us()
         {
@@ -146,15 +146,53 @@ namespace MVC_EF_Start.Controllers
             return View(e);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+       /* public IActionResult Modify()
+        {
+            return View();
+        }*/
+        public IActionResult Delete()
+        {
+            return View();
+        }
+
+        public IActionResult Listings()
+        {
+            return View(dbContext.Company_tab);
+        }
+
+
+
+        public async Task<IActionResult> Modify(int id)
         {
             if (id == null)
             {
                 return RedirectToAction("Index");
             }
-            var getResult = await dbContext.Company_tab.FindAsync(id);
-            return View(getResult);
+
+            var getcompdtls = await dbContext.Company_tab.FindAsync(id);
+            return View(getcompdtls);
         }
+        [HttpPost]
+        /*public async Task<IActionResult> Modify(Company nc)
+        {
+            if(ModelState.IsValid)
+            {
+                dbContext.Update(nc);
+                await dbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(nc);
+        }*/
+
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    var getResult = await dbContext.Company_tab.FindAsync(id);
+        //    return View(getResult);
+        //}
         
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
@@ -168,21 +206,15 @@ namespace MVC_EF_Start.Controllers
         }
         public async Task<IActionResult> Details(int id)
         {
-
-
-
             var companyDetail = await dbContext.Company_tab
                 .FirstOrDefaultAsync(m => m.company_id == id);
-
-
             if (companyDetail == null)
             {
                 return NotFound();
             }
-
             return View();
         }
-        
+      
         public IActionResult Update(string cond)
         {
 
@@ -360,13 +392,6 @@ namespace MVC_EF_Start.Controllers
 
                 }
 
-                //for chart
-
-       
-
-
-              
-
 
             }
             catch (Exception e)
@@ -377,6 +402,7 @@ namespace MVC_EF_Start.Controllers
             //   dbContext.SaveChanges();
 
             return View(boats);
+            
         }
 
 

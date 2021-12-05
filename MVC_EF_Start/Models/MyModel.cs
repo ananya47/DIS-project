@@ -23,10 +23,9 @@ namespace MVC_EF_Start.Models
         [Key]
         public int city_id { get; set; }
         public string city { get; set; }
+        public State State { get; set; }
         public List<Company> Company { get; set; }
 
-       
-        public State State { get; set; }
     }
     public class Company
     {
@@ -38,10 +37,8 @@ namespace MVC_EF_Start.Models
 
         public string zip { get; set; }
         public string phone_number { get; set; }
-        public List<Boat> Boat { get; set; }
-
-    
         public City City { get; set; }
+        public List<Boat> Boat { get; set; }       
 
     }
 
@@ -57,8 +54,6 @@ namespace MVC_EF_Start.Models
         public string cruise_type { get; set; }
         public Company Company { get; set; }
     }
-   
-    
    
 
     public class ChartModel

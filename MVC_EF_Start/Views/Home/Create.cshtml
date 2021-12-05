@@ -8,47 +8,81 @@
 <h1>Create</h1>
 
 <h4>Company</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="company_url" class="control-label"></label>
-                <input asp-for="company_url" class="form-control" />
-                <span asp-validation-for="company_url" class="text-danger"></span>
+<html>
+
+<body>
+    <!-- Navbar -->
+    <div class="container-wrapper">
+        <div class="brand-labling">
+            <img src="~/img/boat.png" />
+            <span>RENT-A-bOAT</span>
+        </div>
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Search_page">Search</a></li>
+                    <li>
+                        <a href="#">Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Create">Add</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Listings">Manage</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Loaction</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
+
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>
+                </ul>
             </div>
-            <div class="form-group">
-                <label asp-for="company" class="control-label"></label>
-                <input asp-for="company" class="form-control" />
-                <span asp-validation-for="company" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="street_address" class="control-label"></label>
-                <input asp-for="street_address" class="form-control" />
-                <span asp-validation-for="street_address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="zip" class="control-label"></label>
-                <input asp-for="zip" class="form-control" />
-                <span asp-validation-for="zip" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="phone_number" class="control-label"></label>
-                <input asp-for="phone_number" class="form-control" />
-                <span asp-validation-for="phone_number" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="company_url" class="control-label"></label>
+                    <input asp-for="company_url" class="form-control" />
+                    <span asp-validation-for="company_url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="company" class="control-label"></label>
+                    <input asp-for="company" class="form-control" />
+                    <span asp-validation-for="company" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="street_address" class="control-label"></label>
+                    <input asp-for="street_address" class="form-control" />
+                    <span asp-validation-for="street_address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="zip" class="control-label"></label>
+                    <input asp-for="zip" class="form-control" />
+                    <span asp-validation-for="zip" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="phone_number" class="control-label"></label>
+                    <input asp-for="phone_number" class="form-control" />
+                    <span asp-validation-for="phone_number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
