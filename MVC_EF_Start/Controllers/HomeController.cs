@@ -38,14 +38,14 @@ namespace MVC_EF_Start.Controllers
         //{
         //    return View();
         //}
-     /*   [Route("Companies")]
-        public IActionResult Companies()
-        {
+        /*   [Route("Companies")]
+           public IActionResult Companies()
+           {
 
-            return View();
-        }*/
+               return View();
+           }*/
 
-    
+
         //public ActionResult Listing_modify()
         //{
         //    return View();
@@ -100,6 +100,7 @@ namespace MVC_EF_Start.Controllers
             return View("Search_page");
             
         }*/
+        /*test
         public ActionResult Stats()
         {
             string api_link = "https://data.ny.gov/resource/ibtm-q4dj.json";
