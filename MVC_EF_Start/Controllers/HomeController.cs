@@ -148,16 +148,6 @@ namespace MVC_EF_Start.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id==null)
-            {
-                return RedirectToAction("Index");
-            }
-            var getResult = await dbContext.Company_tab.FindAsync(id);
-            return View(getResult);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -165,6 +155,34 @@ namespace MVC_EF_Start.Controllers
             var getResult = await dbContext.Company_tab.FindAsync(id);
             return View(getResult);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var getResult = await dbContext.Company_tab.FindAsync(id);
+            dbContext.Company_tab.Remove(getResult);
+            await dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+
+        }
+        public async Task<IActionResult> Details(int id)
+        {
+
+
+
+            var companyDetail = await dbContext.Company_tab
+                .FirstOrDefaultAsync(m => m.company_id == id);
+
+
+            if (companyDetail == null)
+            {
+                return NotFound();
+            }
+
+            return View();
+        }
+        
         public IActionResult Update(string cond)
         {
 
@@ -191,7 +209,7 @@ namespace MVC_EF_Start.Controllers
 
             return RedirectToAction("mean", new { val = exe.street_address });
         }
-        public IActionResult Delete(string cond)
+      /*  public IActionResult Delete(string cond)
         {
             var exe = dbContext.Company_tab.FirstOrDefault(x => x.company == cond);
             if (exe != null)
@@ -204,7 +222,7 @@ namespace MVC_EF_Start.Controllers
 
 
             return RedirectToAction("mean", new { val = exe.street_address });
-        }
+        }*/
         public IActionResult Index()
         {
 
