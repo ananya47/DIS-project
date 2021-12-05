@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVC_EF_Start.Models.Company>
+
+@{
+    ViewData["Title"] = "Search_page11";
+}
+
+<h1>Search_page11</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.company_url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.street_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.zip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone_number)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.company_url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.street_address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone_number)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.company_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.company_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.company_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
