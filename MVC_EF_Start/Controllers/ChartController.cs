@@ -41,24 +41,21 @@ namespace MVC_EF_Start.Controllers
                               home_port = res.Key
                           }).Take(5);
 
-            string[] label = new string[] {"1","3","4","9","2"};
-            List<string> labels = new List<string>(label);
+            int[] label = new int[]{1,3,4,9,2};
+            List<int> labels = new List<int>(label);
 
             List<string> ChartLabels = new List<string>();
             ChartLabels = results.Select(p => p.home_port).ToList();
             /*List<long> ChartData = new List<long>();
             ChartData = results.Select(p => p.covid_19_deaths).ToList();*/
+            ViewBag.Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'"));
+              ViewBag.Data = String.Join(",", labels.Select(d => d));
 
-            ChartModel Model = new ChartModel
-            {
-                ChartType = "bar",
-                Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'")),
-                Data = String.Join(",", labels.Select(d => d)),
 
-                Title = "Top 5 cities to hire boats"
-            };
-            return View(Model);
+            return View();
         }
+
+        
     }
     
 }

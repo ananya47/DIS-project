@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,13 @@
     <link rel='stylesheet' href='~/css/searchpagestyle.css' />
     <link rel="stylesheet" type="text/css" media="screen" href="~/css/style.css" />
 </head>
-
+@{
+    List<Company> comp = ViewBag.Company;
+    List<Boat> evnt = ViewBag.Boat;
+    string company = ViewBag.company;
+    string company_url1 = ViewBag.company_url;
+    string phone_number = ViewBag.phone_number;
+}
 <body>
 
     <!-- Navbar -->
@@ -58,6 +65,8 @@
                 <input type="text" name="field3" class="field-style field-split align-right" placeholder="City" />
                 <input type="text" name="field3" class="field-style field-split align-right" placeholder="Vessel Type" />
                 <input type="text" name="field3" class="field-style field-split align-right" placeholder="Water ways" />
+
+                
             </form>
             <br>
             <button class="w3-button w3-teal buttonsave">SEARCH</button>
@@ -65,63 +74,51 @@
         <br>
         <div class='divtwo'>
             <div style="overflow-x: auto;">
-                <table class="gridtable">
-                    <tr>
-                        <th>Company</th>
-                        <th>Address</th>
-                        <th>Company Website</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip Code</th>
-                        <th>Phone number</th>
-                        <th>Vessel Types</th>
-                        <th>Water ways</th>
-                    </tr>
-                    <tr>
-                        <td>WNY Classic Cruises</td>
-                        <td>1 Dann Street</td>
-                        <td>http://www.wnyclassiccruises.com/</td>
-                        <td>Buffalo</td>
-                        <td>NY</td>
-                        <td>14207</td>
-                        <td>(716) 946-7246</td>
-                        <td>Summer Love</td>
-                        <td>Buffalo</td>
-                    </tr>
-                    <tr>
-                        <td>Grand Lady Cruises</td>
-                        <td>P.O. Box 746</td>
-                        <td>http://www.grandlady.com</td>
-                        <td>Buffalo	NY</td>
-                        <td>NY</td>
-                        <td>14207</td>
-                        <td>(716) 824-5239</td>
-                        <td>Canoes & kayaks, fishing boats</td>
-                        <td>Buffalo</td>
-                    </tr>
-                    <tr>
-                        <td>Camillus Erie Canal Park</td>
-                        <td>5750 Devoe Rd	</td>
-                        <td>http://www.eriecanalcamillus.com</td>
-                        <td>Camillus	</td>
-                        <td>NY	</td>
-                        <td>13031	</td>
-                        <td>(315) 487-7895</td>
-                        <td>English-style narrowboats</td>
-                        <td>Camillus</td>
-                    </tr>
-                    <tr>
-                        <td>Dutch Apple Cruises	</td>
-                        <td>PO Box 395	</td>
-                        <td>http://www.dutchapplecruises.com</td>
-                        <td>Albany	</td>
-                        <td>NY	</td>
-                        <td>12201	</td>
-                        <td>(518) 463-0220</td>
-                        <td>Grand Lady</td>
-                        <td>Albany</td>
-                    </tr>
+
+                <h3> @company_url1</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            Company name
+                        </tr>
+                        <tr>
+                            Company URL:
+                            
+                        </tr>
+                        <tr>
+                            @{
+                                List<Company> data = ViewBag.data;
+                                if (data != null)
+                                {
+
+                                    @for (int i = 0; i < data.Count; i++)
+                                    {
+                                        <td>@(i + 1)</td>
+
+                                        <td>@data[i].company</td>
+
+                                    }
+                                }
+                            }
+
+                        </tr>
+                     
+                      </thead>
+                    <tbody>
+                        <tr>
+                            @if (comp != null)
+                            {
+                                @for (int i = 0; i < comp.Count(); i++)
+                                {
+                                    <td>@comp[i].company</td>
+                                    <td>@comp[i].company_url</td>
+                                }
+                            }
+
+                        </tr>
+                    </tbody>
                 </table>
+
             </div>
         </div>
 </body>

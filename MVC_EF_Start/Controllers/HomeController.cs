@@ -10,6 +10,7 @@ using System.Net.Http;
 using MVC_EF_Start.Models;
 using MVC_EF_Start.DataAccess;
 using MVC_EF_Start.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 /*push test*/
 namespace MVC_EF_Start.Controllers
@@ -23,7 +24,7 @@ namespace MVC_EF_Start.Controllers
         {
             dbContext = context;
         }
-        HttpClient httpClient;
+        HttpClient httpClient= new HttpClient();
 
         static string BASE_URL = "https://data.ny.gov/resource/ibtm-q4dj.json";
         static string API_KEY = "wHwQfj4aHgZ9oBxLUM7sFZYaByPzRShOVsU9pPFw";
@@ -37,7 +38,12 @@ namespace MVC_EF_Start.Controllers
         {
             return View();
         }
+     /*   [Route("Companies")]
+        public IActionResult Companies()
+        {
 
+            return View();
+        }*/
         public ActionResult Listing_modify()
         {
             return View();
@@ -51,15 +57,129 @@ namespace MVC_EF_Start.Controllers
         {
             return View();
         }
-        public ActionResult Search_page()
+        [Route("Search_page")]
+        public IActionResult Search_page(string search)
         {
-            return View();
+
+            Dictionary<string, int> zips = new Dictionary<string, int>();
+            zips.Add("florida", 33614); zips.Add("ohio", 44264); zips.Add("california", 95389); zips.Add("texas", 79834); zips.Add("michigan", 38124);
+            zips.Add("utah", 84767); zips.Add("alaska", 99755); zips.Add("illinois", 62234); zips.Add("arizona", 86001); zips.Add("alabama", 35203);
+            zips.Add("kansas", 66701); zips.Add("maryland", 20601); zips.Add("newyork", 10007); zips.Add("indiana", 46304); zips.Add("colorado", 80517);
+            zips.Add("oregon", 33614); zips.Add("missouri", 33614);
+            if (search != null)
+            {
+                Company stated = dbContext.Company_tab.Where(c => c.company == search).FirstOrDefault();
+                try
+                {
+                    int x = 0;
+                    if (zips.TryGetValue(stated.company, out x))
+                    { ViewBag.zip = x; }
+                    else
+                        ViewBag.zip = 30412;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                if (stated != null)
+                {
+                    List<Company> data = dbContext.Company_tab.Include(c => c.company).Where(c => c.company_id == stated.company_id).ToList();
+                    ViewBag.data = data;
+                    ViewBag.state = stated.company;
+                }
+            }
+            return View("Search_page");
+            
         }
         public ActionResult Stats()
         {
+            string api_link = "https://data.ny.gov/resource/ibtm-q4dj.json";
+
+            httpClient.BaseAddress = new Uri(api_link);
+
+            HttpResponseMessage response = httpClient.GetAsync(api_link).GetAwaiter().GetResult();
+            // DbDomain d = new DbDomain(_context);
+            /*if (d._context.Covid_Conditions_data.ToList().Count == 0)
+            {
+                d.covidConditionPost(covid_conditions);
+            }*/
+
+            var results = (from b in dbContext.Boats_tab
+                           group b by b.home_port into res
+                           select new
+                           {
+                               home_port = res.Key
+                           }).Take(5);
+
+            int[] label = new int[] { 1, 3, 4, 9, 2 };
+            List<int> labels = new List<int>(label);
+
+            List<string> ChartLabels = new List<string>();
+            ChartLabels = results.Select(p => p.home_port).ToList();
+            /*List<long> ChartData = new List<long>();
+            ChartData = results.Select(p => p.covid_19_deaths).ToList();*/
+            ViewBag.Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'"));
+            ViewBag.Data = String.Join(",", labels.Select(d => d));
+
+
             return View();
         }
+        public IActionResult Create()
+        {
 
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(Company e)
+        {
+            if (ModelState.IsValid)
+            {
+                dbContext.Add(e);
+                await dbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(e);
+        }
+        public IActionResult Update(string cond)
+        {
+
+            //fetch the records which match the given condition
+            var level = dbContext.Company_tab.Where(c => c.company == cond).First();
+
+            return View(level);
+        }
+        [HttpPost]
+        public IActionResult UpdateRecord(Company data)
+        {
+            var exe = dbContext.Company_tab.FirstOrDefault(x => x.company_id == data.company_id);
+
+            if (exe != null)
+            {
+                exe.street_address = data.street_address;
+                exe.company_url = data.company_url;
+                exe.phone_number = data.phone_number;
+
+                dbContext.SaveChanges();
+            }
+
+
+
+            return RedirectToAction("mean", new { val = exe.street_address });
+        }
+        public IActionResult Delete(string cond)
+        {
+            var exe = dbContext.Company_tab.FirstOrDefault(x => x.company == cond);
+            if (exe != null)
+            {
+                dbContext.Company_tab.Remove(exe);
+                dbContext.SaveChanges();
+                TempData["shortMessage"] = "Deleted Successfully";
+            }
+
+
+
+            return RedirectToAction("mean", new { val = exe.street_address });
+        }
         public IActionResult Index()
         {
 
@@ -138,10 +258,10 @@ namespace MVC_EF_Start.Controllers
 
                         city = x.city;
                         state = x.state;
-
+                        State obj3 = new State();
                         if (!state_track.Contains(state))
                         {
-                            State obj3 = new State();
+                            
                             state_track.Add(state);
                             obj3.state = state;
 
@@ -156,6 +276,7 @@ namespace MVC_EF_Start.Controllers
 
                             city_track.Add(city);
                             obj2.city = city;
+                            obj2.State = obj3;
                             // obj2.
                             dbContext.City_tab.Add(obj2);
                             dbContext.SaveChanges();
