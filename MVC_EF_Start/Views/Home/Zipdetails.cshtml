@@ -1,25 +1,36 @@
-﻿@model MVC_EF_Start.Models.Company
+﻿@model IEnumerable<Company>
 
-@{
-    ViewBag.Title = "Zipdetails";
-}
-
+<!DOCTYPE html>
+<html>
 <h1>Zipdetails</h1>
 
+<body>
+    <div>
+        <h4>Company Details</h4>
+        <table class=" table table-bordered table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>CompanyName</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null)
+                {
+                    <tr><td colspan="7" class="text-center">No Model Data</td></tr>
+                }
+                else
+                {
+                    @foreach (var z in Model)
+                    {
+                        <tr>
+                            <td>@z.company</td>
+                        </tr>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @foreach (var item in Model.zip)
-               
-                @Html.DisplayNameFor(model => model.company_url)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.company)
-            </th>
+                    }
+                }
+            </tbody>
+        </table>
 
-        </tr>
-    </thead>
-    s
-</table>
+        <div>
+</body>
+</html>

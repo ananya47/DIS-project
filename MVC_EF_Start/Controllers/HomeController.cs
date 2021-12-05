@@ -174,10 +174,15 @@ namespace MVC_EF_Start.Controllers
         //{
         //    return View();
         //}
-        public ViewResult Zipdetails(string zipid)
+        public ActionResult Zipdetails(string zipid)
         {
-            var zipdtl = dbContext.Company_tab.Where(a => a.zip == zipid).Take(5);
-            return View(zipdtl);
+            return View(dbContext.Company_tab.Where(a => a.zip == zipid).ToList());
+
+            //var zipdtl = (from c in dbContext.Company_tab
+            //              where c.zip == zipid
+            //              select c.compName).ToArray();
+            //    //dbContext.Company_tab.Where(a => a.zip == zipid).Take(5);
+            //return View(zipdtl);
 
             
             ////string compName = null;
