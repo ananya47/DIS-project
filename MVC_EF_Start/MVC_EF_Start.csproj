@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="css\style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="css\style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>

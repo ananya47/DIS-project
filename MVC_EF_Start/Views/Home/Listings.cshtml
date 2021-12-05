@@ -1,0 +1,94 @@
+﻿
+@model IEnumerable<Company>
+
+
+@{
+    var title = "READ Company";
+    ViewData["Title"] = "Listings";
+}
+
+<html>
+
+
+<body>
+    <!-- Navbar -->
+    <div class="container-wrapper">
+        <div class="brand-labling">
+            <img src="~/img/boat.png" />
+            <span>RENT-A-bOAT</span>
+        </div>
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Search_page">Search</a></li>
+                    <li>
+                        <a href="#">Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Create">Add</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Listings">Manage</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Loaction</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
+
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <h1>Listings</h1>
+
+    <div>
+        <h4>Company Details</h4>
+        <table class=" table table-bordered table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>company_id</th>
+                    <th>Company_url</th>
+                    <th>CompanyName</th>
+                    <th>street_address</th>
+                    <th>zip</th>
+                    <th>phone_number</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null)
+                {
+                    <tr><td colspan="7" class="text-center">No Model Data</td></tr>
+                }
+                else
+                {
+                    @foreach (var p in Model)
+                    {
+                        <tr>
+                            <td>@p.company_id</td>
+                            <td>@p.company_url</td>
+                            <td>@p.company</td>
+                            <td>@p.street_address</td>
+                            <td>@p.zip</td>
+                            <td>@p.phone_number</td>
+                            <td><a asp-action="Modify" asp-route-id="@p.company_id">Update</a></td>
+                            <td>
+                                <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
+                                    <button>Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+
+        <div>
+
+            <a asp-action="Index">Back to List</a>
+        </div>
+</body>
+</html>

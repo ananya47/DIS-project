@@ -2,53 +2,126 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "_Layout";
+
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .create-container {
+            background-color: white;
+            height: 100vw;
+        }
+        .form-wrapper {
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            width: 500px;
+            padding: 4px;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Search_page11">Search</a></li>
+                    <li>
+                        <a href="#">Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Create">Add</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Listings">Manage</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Location</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>
+                </ul>
+            </div>
+
+        </div>
    
-}
+    <!-- Showcase -->
+    <div class="create-container">
+        <h1 align="center" style="text-shadow: 2px 2px skyblue;">Create Company</h1>
 
-<h1>Create</h1>
 
-<h4>Company</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="company_url" class="control-label"></label>
-                <input asp-for="company_url" class="form-control" />
-                <span asp-validation-for="company_url" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="company" class="control-label"></label>
-                <input asp-for="company" class="form-control" />
-                <span asp-validation-for="company" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="street_address" class="control-label"></label>
-                <input asp-for="street_address" class="form-control" />
-                <span asp-validation-for="street_address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="zip" class="control-label"></label>
-                <input asp-for="zip" class="form-control" />
-                <span asp-validation-for="zip" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="phone_number" class="control-label"></label>
-                <input asp-for="phone_number" class="form-control" />
-                <span asp-validation-for="phone_number" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr color="black" />
+    <div class="form-wrapper">
+        <div class="col-md-4">
+            <form asp-action="Create" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="company_url" class="control-label"></label>
+                    <div>
+                        <input asp-for="company_url" class="form-control" />
+                        <span asp-validation-for="company_url" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="company" class="control-label"></label>
+                    <div>
+                        <input asp-for="company" class="form-control" />
+                        <span asp-validation-for="company" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="street_address" class="control-label"></label>
+                    <div>
+                        <input asp-for="street_address" class="form-control" />
+                        <span asp-validation-for="street_address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="zip" class="control-label"></label>
+                    <div>
+                        <input asp-for="zip" class="form-control" />
+                        <span asp-validation-for="zip" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="phone_number" class="control-label"></label>
+                    <div>
+                        <input asp-for="phone_number" class="form-control" />
+                        <span asp-validation-for="phone_number" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*<input onclick="location.href='<%:Url.Action("Index","Controller")%>'"type="submit" value="Go Back" class="btn btn-primary" />*@
+                    <a asp-action="Index">Back to List</a>
+                    <div>
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        
+    </div>
+    </div>
+</body>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

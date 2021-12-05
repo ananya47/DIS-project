@@ -145,7 +145,23 @@ namespace MVC_EF_Start.Controllers
             }
             return View(e);
         }
+        public IActionResult Listings()
+        {
+            return View(dbContext.Company_tab);
+        }
 
+
+
+        public async Task<IActionResult> Modify(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var getcompdtls = await dbContext.Company_tab.FindAsync(id);
+            return View(getcompdtls);
+        }
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
