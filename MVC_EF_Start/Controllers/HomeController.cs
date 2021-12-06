@@ -318,7 +318,7 @@ namespace MVC_EF_Start.Controllers
         //{
         //    return View();
         //}
-        [HttpPost]
+       
         public ActionResult Zipdetails(string zipid)
         {
             //return View(dbContext.Company_tab.Where(a => a.zip == zipid).ToList());
@@ -331,7 +331,7 @@ namespace MVC_EF_Start.Controllers
                              }).Take(5);
 */
            
-            ViewBag.zip1 = (from c in dbContext.Company_tab
+            ViewBag.comp1 = (from c in dbContext.Company_tab
                               where c.zip == zipid
                               select c.street_address).ToList();
             /*ViewBag.ph1 = (from c in dbContext.Company_tab
