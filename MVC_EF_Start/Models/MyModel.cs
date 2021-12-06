@@ -29,8 +29,8 @@ namespace MVC_EF_Start.Models
     }
     public class Company
     {
-        internal string compURL;
-        internal string compName;
+       // internal string compURL;
+        //internal string compName;
 
         [Key]
         public int company_id { get; set; }

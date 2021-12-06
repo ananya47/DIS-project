@@ -1,36 +1,123 @@
 ﻿@model IEnumerable<Company>
 
-<!DOCTYPE html>
-<html>
-<h1>Zipdetails</h1>
+@{
+    var title = "READ Company";
+    ViewData["Title"] = "Listings";
+}
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    @*    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <style>
+        .create-container {
+            background-color: white;
+            height: 100vw;
+        }
+
+        .form-wrapper {
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            width: 500px;
+            padding: 4px;
+        }
+
+        .brand-labling {
+            color: white;
+        }
+
+            .brand-labling img {
+                background-color: white;
+                height: 30px;
+                width: 40px;
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+
+        .body {
+            background-color: white;
+        }
+
+        .top-menu-wrapper {
+            background-color: black;
+        }
+
+        .control-label {
+            color: black;
+        }
+    </style>
+</head>
 
 <body>
-    <div>
-        <h4>Company Details</h4>
-        <table class=" table table-bordered table-sm table-striped">
-            <thead>
-                <tr>
-                    <th>CompanyName</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model == null)
-                {
-                    <tr><td colspan="7" class="text-center">No Model Data</td></tr>
-                }
-                else
-                {
-                    @foreach (var z in Model)
+    <!-- Navbar -->
+    <div class="container-wrapper">
+        <div class="brand-labling">
+            <img src="~/img/boat.png" />
+            <span>RENT-A-bOAT</span>
+        </div>
+        <!-- Navbar -->
+        <div class="top-menu-wrapper">
+            <div class="list-menu">
+                <ul>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Search_page">Search</a></li>
+                    <li>
+                        <a href="#">Listings &#9662;</a>
+                        <ul class="dropdown">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Create">Add</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Listings">Manage</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Location</a></li>
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
+
+                    <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+   
+    
+
+  
+        <h1 align="center" style="text-shadow: 2px 2px skyblue;">Company Details for Zip @ViewBag.zip1</h1>
+        <div>
+            <table class=" table table-bordered table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>CompanyName</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var z in @ViewBag.comp1)
                     {
                         <tr>
-                            <td>@z.company</td>
+                            <td>@z</td>
+
                         </tr>
 
                     }
-                }
-            </tbody>
-        </table>
 
-        <div>
-</body>
-</html>
+                </tbody>
+            </table>
+        </div>
+       
+
+    </body>
+

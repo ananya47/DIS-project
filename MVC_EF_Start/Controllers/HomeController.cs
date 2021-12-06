@@ -32,8 +32,152 @@ namespace MVC_EF_Start.Controllers
         }
 
         public IActionResult Index()
-        {   
-            return View();
+        {
+            httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+
+            httpClient.DefaultRequestHeaders.Accept.Add(
+                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            string BOAT_API_PATH = BASE_URL;
+            string boatsData = "";
+
+            //BoatDetail boats = null;
+            List<Class1> boats = new List<Class1>();
+            httpClient.BaseAddress = new Uri(BOAT_API_PATH);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(BOAT_API_PATH).GetAwaiter().GetResult();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    boatsData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                }
+
+                if (!boatsData.Equals(""))
+                {
+
+                    // JsonConvert is part of the NewtonSoft.Json Nuget package
+                    //boats = JsonConvert.DeserializeObject<BoatDetail>(boatsData);
+                    boats = JsonConvert.DeserializeObject<List<Class1>>(boatsData);
+
+                    //List<Class1> selectedCollection = selected.ToList();
+                    Console.WriteLine(boats);
+                    Console.WriteLine("Data displayed");
+                    // Console.Log(boat);
+
+                    // var boats = dbContext.Boats_tab.ToList();
+                    /*  var companies = dbContext.Company_tab.ToList();
+                      var cities = dbContext.City_tab.ToList();
+                      var states = dbContext.State_tab.ToList();*/
+
+                    HashSet<string> state_track = new HashSet<string>();
+                    HashSet<string> company_track = new HashSet<string>();
+                    HashSet<string> city_track = new HashSet<string>();
+
+                    string type = null;
+                    string home_port = null;
+                    string vessel_types = null;
+                    string cruise_type = null;
+                    string city = null;
+                    string state = null;
+                    string company = null;
+                    string street_address = null;
+                    string url = null;
+                    string zip = null;
+                    string phone_number = null;
+                    string latitude = null;
+                    string longitude = null;
+
+                    foreach (var x in boats)
+                    {
+
+                        // type= x[0]["type"].ToString();
+                        type = x.type;
+                        home_port = x.home_port;
+                        latitude = x.latitude;
+                        longitude = x.longitude;
+                        vessel_types = x.vessel_types;
+                        cruise_type = x.cruise_type;
+
+                        company = x.company;
+                        street_address = x.street_address;
+                        url = x.company_url.url;
+                        zip = x.zip;
+                        phone_number = x.phone_number;
+
+                        city = x.city;
+                        state = x.state;
+                        State obj3 = new State();
+                        if (!state_track.Contains(state))
+                        {
+
+                            state_track.Add(state);
+                            obj3.state = state;
+
+                            dbContext.State_tab.Add(obj3);
+                            dbContext.SaveChanges();
+                        }
+
+
+                        City obj2 = new City();
+                        if (!city_track.Contains(city))
+                        {
+
+                            city_track.Add(city);
+                            obj2.city = city;
+                            obj2.State = obj3;
+                            // obj2.
+                            dbContext.City_tab.Add(obj2);
+                            dbContext.SaveChanges();
+                        }
+
+
+                        Company obj1 = new Company();
+                        if (!company_track.Contains(company))
+                        {
+
+                            obj1.company = company;
+                            company_track.Add(company);
+                            obj1.street_address = street_address;
+                            obj1.company_url = url;
+                            obj1.zip = zip;
+                            obj1.phone_number = phone_number;
+                            dbContext.Company_tab.Add(obj1);
+                            dbContext.SaveChanges();
+                        }
+
+
+                        Boat obj = new Boat();
+                        obj.type = type;
+                        obj.home_port = home_port;
+                        obj.latitude = latitude;
+                        obj.longitude = longitude;
+                        obj.vessel_types = vessel_types;
+                        dbContext.Boats_tab.Add(obj);
+
+                        //ChartModel obj4 = new ChartModel();
+                        // obj4.Labels = home_port;
+                        //obj4.Data=
+                        dbContext.SaveChanges();
+
+                    }
+
+
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                // This is a useful place to insert a breakpoint and observe the error message
+                Console.WriteLine(e.Message);
+            }
+            //   dbContext.SaveChanges();
+
+            return View(boats);
+         
         }
 
         //search page 
@@ -176,15 +320,22 @@ namespace MVC_EF_Start.Controllers
         //}
         public ActionResult Zipdetails(string zipid)
         {
-            return View(dbContext.Company_tab.Where(a => a.zip == zipid).ToList());
+            //return View(dbContext.Company_tab.Where(a => a.zip == zipid).ToList());
+            ViewBag.zip1 = zipid;
+            ViewBag.comp1 = (from c in dbContext.Company_tab
+                          where c.zip == zipid
+                          select c.company).ToList();
+          /*  ViewBag.st1 = (from c in dbContext.Company_tab
+                              where c.zip == zipid
+                              select c.street_address).ToList();
+            ViewBag.ph1 = (from c in dbContext.Company_tab
+                           where c.zip == zipid
+                           select c.phone_number).ToList();*/
+            //dbContext.Company_tab.Where(a => a.zip == zipid).Take(5);
 
-            //var zipdtl = (from c in dbContext.Company_tab
-            //              where c.zip == zipid
-            //              select c.compName).ToArray();
-            //    //dbContext.Company_tab.Where(a => a.zip == zipid).Take(5);
-            //return View(zipdtl);
+            return View();
 
-            
+
             ////string compName = null;
             ////string compURL = null;
             //List<string> zips = new List<string>();
@@ -295,150 +446,7 @@ namespace MVC_EF_Start.Controllers
         public IActionResult InsertApi()
         {
 
-            httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-
-            httpClient.DefaultRequestHeaders.Accept.Add(
-                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            string BOAT_API_PATH = BASE_URL;
-            string boatsData = "";
-
-            //BoatDetail boats = null;
-            List<Class1> boats = new List<Class1>();
-            httpClient.BaseAddress = new Uri(BOAT_API_PATH);
-            try
-            {
-                HttpResponseMessage response = httpClient.GetAsync(BOAT_API_PATH).GetAwaiter().GetResult();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    boatsData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                }
-
-                if (!boatsData.Equals(""))
-                {
-
-                    // JsonConvert is part of the NewtonSoft.Json Nuget package
-                    //boats = JsonConvert.DeserializeObject<BoatDetail>(boatsData);
-                    boats = JsonConvert.DeserializeObject<List<Class1>>(boatsData);
-
-                    //List<Class1> selectedCollection = selected.ToList();
-                    Console.WriteLine(boats);
-                    Console.WriteLine("Data displayed");
-                    // Console.Log(boat);
-
-                    // var boats = dbContext.Boats_tab.ToList();
-                    /*  var companies = dbContext.Company_tab.ToList();
-                      var cities = dbContext.City_tab.ToList();
-                      var states = dbContext.State_tab.ToList();*/
-
-                    HashSet<string> state_track = new HashSet<string>();
-                    HashSet<string> company_track = new HashSet<string>();
-                    HashSet<string> city_track = new HashSet<string>();
-
-                    string type = null;
-                    string home_port = null;
-                    string vessel_types = null;
-                    string cruise_type = null;
-                    string city = null;
-                    string state = null;
-                    string company = null;
-                    string street_address = null;
-                    string url = null;
-                    string zip = null;
-                    string phone_number = null;
-                    string latitude = null;
-                    string longitude = null;
-
-                    foreach (var x in boats)
-                    {
-
-                        // type= x[0]["type"].ToString();
-                        type = x.type;
-                        home_port = x.home_port;
-                        latitude = x.latitude;
-                        longitude = x.longitude;
-                        vessel_types = x.vessel_types;
-                        cruise_type = x.cruise_type;
-
-                        company = x.company;
-                        street_address = x.street_address;
-                        url = x.company_url.url;
-                        zip = x.zip;
-                        phone_number = x.phone_number;
-
-                        city = x.city;
-                        state = x.state;
-                        State obj3 = new State();
-                        if (!state_track.Contains(state))
-                        {
-                            
-                            state_track.Add(state);
-                            obj3.state = state;
-
-                            dbContext.State_tab.Add(obj3);
-                            dbContext.SaveChanges();
-                        }
-                        
-
-                        City obj2 = new City();
-                        if (!city_track.Contains(city))
-                        {
-
-                            city_track.Add(city);
-                            obj2.city = city;
-                            obj2.State = obj3;
-                            // obj2.
-                            dbContext.City_tab.Add(obj2);
-                            dbContext.SaveChanges();
-                        }
-                        
-
-                        Company obj1 = new Company();
-                        if (!company_track.Contains(company))
-                        {
-
-                            obj1.company = company;
-                            company_track.Add(company);
-                            obj1.street_address = street_address;
-                            obj1.company_url = url;
-                            obj1.zip = zip;
-                            obj1.phone_number = phone_number;
-                            dbContext.Company_tab.Add(obj1);
-                            dbContext.SaveChanges();
-                        }
-                       
-
-                        Boat obj = new Boat();
-                        obj.type = type;
-                        obj.home_port = home_port;
-                        obj.latitude = latitude;
-                        obj.longitude = longitude;
-                        obj.vessel_types = vessel_types;
-                        dbContext.Boats_tab.Add(obj);
-
-                        //ChartModel obj4 = new ChartModel();
-                       // obj4.Labels = home_port;
-                        //obj4.Data=
-                        dbContext.SaveChanges();
-
-                    }
-
-                
-
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                // This is a useful place to insert a breakpoint and observe the error message
-                Console.WriteLine(e.Message);
-            }
-            //   dbContext.SaveChanges();
-
-            return View(boats);
+            return View();
             
         }
 
