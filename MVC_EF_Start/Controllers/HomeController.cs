@@ -199,7 +199,7 @@ namespace MVC_EF_Start.Controllers
             {
                 dbContext.Add(e);
                 await dbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Listings");
             }
             return View(e);
         }

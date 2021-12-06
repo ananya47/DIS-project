@@ -18,6 +18,7 @@
     @* <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/site.css">
 
 
 
@@ -27,20 +28,12 @@
             height: 100vw;
         }
 
-        .table-wrapper {
-            padding-left: 20px;
-            padding-right: 20px;
-            overflow: auto;
-        }
-
         .form-wrapper {
             height: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-
 
         .form-group {
             display: flex;
@@ -49,13 +42,9 @@
             padding: 4px;
         }
 
-
-
         .brand-labling {
             color: white;
         }
-
-
 
             .brand-labling img {
                 background-color: white;
@@ -65,22 +54,15 @@
                 margin-left: 20px;
             }
 
-
-
-        .body {
-            background-color: white;
+        .container-wrapper {
+            display: flex;
+            justify-content: space-between;
+            background-color: black;
+            align-items: center;
         }
-
-
 
         .top-menu-wrapper {
             background-color: black;
-        }
-
-
-
-        .control-label {
-            color: black;
         }
     </style>
 </head>
@@ -119,23 +101,24 @@
 
         </div>
     </div>
-    <h1 align="center" style="text-shadow: 2px 2px skyblue;">Listings</h1>
-    <div>
-        <h4>Company Details</h4>
-        <table class="table table-wrapper table-bordered table-sm table-striped">
-            <thead>
-                <tr>
-                    <th>company_id</th>
-                    <th>Company_url</th>
-                    <th>CompanyName</th>
-                    <th>zip</th>
-                    <th>phone_number</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model == null)
+    <div style="background-color:white">
+        <h1 align="center" style="text-shadow: 2px 2px skyblue;">Listings</h1>
+        <div>
+            <h4>Company Details</h4>
+            <table class="table table-wrapper table-bordered table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>company_id</th>
+                        <th>Company_url</th>
+                        <th>CompanyName</th>
+                        <th>zip</th>
+                        <th>phone_number</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null)
                 {
                     <tr><td colspan="7" class="text-center">No Model Data</td></tr>
                 }
@@ -146,40 +129,43 @@
 
                     @foreach (var p in Model)
                     {
-                        <tr>
-                            <td>@p.company_id</td>
-                            <td>@p.company_url</td>
-                            <td>@p.company</td>
-                            <td>
-                                @*@using (Html.BeginForm("Zipdetails", "Home"))*@
-                                <a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a>
-                            </td>
+                    <tr>
+                        <td>@p.company_id</td>
+                        <td>@p.company_url</td>
+                        <td>@p.company</td>
+                        <td>
+                            @*@using (Html.BeginForm("Zipdetails", "Home"))*@
+                            <a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a>
+                        </td>
 
 
 
-                            <td>@p.phone_number</td>
-                            <td><a asp-action="Modify" asp-route-id="@p.company_id">Edit</a></td>
-                            <!--<td><a asp-action="Delete" asp-route-id="@p.company_id">Delete</a></td>-->
-                            <td>
-                                <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
-                                    <button>Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                        <td>@p.phone_number</td>
+                        <td><a asp-action="Modify" asp-route-id="@p.company_id">Edit</a></td>
+                        <!--<td><a asp-action="Delete" asp-route-id="@p.company_id">Delete</a></td>-->
+                        <td>
+                            <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
+                                <button>Delete</button>
+                            </form>
+                        </td>
+                    </tr>
 
 
 
                     }
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
 
 
-        <div>
+            @*<div>
 
 
 
-            <a asp-action="Index">Back to List</a>
+                <a asp-action="Index">Back to List</a>
+            </div>*@
+
+
         </div>
 </body>
