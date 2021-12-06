@@ -177,7 +177,7 @@ namespace MVC_EF_Start.Controllers
             //   dbContext.SaveChanges();
 
             return View(boats);
-         
+            
         }
 
         //search page 
@@ -275,8 +275,8 @@ namespace MVC_EF_Start.Controllers
         {
             return View();
         }
-        
-        
+
+
         /*[Route("Search_page")]
         public IActionResult Search_page(string search)
         {
@@ -311,24 +311,30 @@ namespace MVC_EF_Start.Controllers
             return View("Search_page");
             
         }*/
-        
-        
+
+
 
         // public IActionResult Delete()
         //{
         //    return View();
         //}
+        [HttpPost]
         public ActionResult Zipdetails(string zipid)
         {
             //return View(dbContext.Company_tab.Where(a => a.zip == zipid).ToList());
             ViewBag.zip1 = zipid;
-            ViewBag.comp1 = (from c in dbContext.Company_tab
-                          where c.zip == zipid
-                          select c.company).ToList();
-          /*  ViewBag.st1 = (from c in dbContext.Company_tab
+           /* ViewBag.comp1 = (from c in dbContext.Company_tab
+                            where c.zip == zipid into res
+                             select new
+                             {
+                                 com = res.Key
+                             }).Take(5);
+*/
+           
+            ViewBag.zip1 = (from c in dbContext.Company_tab
                               where c.zip == zipid
                               select c.street_address).ToList();
-            ViewBag.ph1 = (from c in dbContext.Company_tab
+            /*ViewBag.ph1 = (from c in dbContext.Company_tab
                            where c.zip == zipid
                            select c.phone_number).ToList();*/
             //dbContext.Company_tab.Where(a => a.zip == zipid).Take(5);

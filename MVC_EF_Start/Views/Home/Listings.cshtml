@@ -99,7 +99,6 @@
                     <th>company_id</th>
                     <th>Company_url</th>
                     <th>CompanyName</th>
-                    <th>street_address</th>
                     <th>zip</th>
                     <th>phone_number</th>
                     <th>Update</th>
@@ -120,7 +119,9 @@
                 <td>@p.company_id</td>
                 <td>@p.company_url</td>
                 <td>@p.company</td>
-                <td><a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a></td>
+                <td>
+                @*@using (Html.BeginForm("Zipdetails", "Home"))*@
+                <a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a></td>
 
                 <td>@p.phone_number</td>
                 <td><a asp-action="Modify" asp-route-id="@p.company_id">Edit</a></td>
