@@ -1,5 +1,6 @@
-﻿
-@model IEnumerable<Company>
+﻿@model IEnumerable<Company>
+
+
 
 @{
     var title = "READ Company";
@@ -7,31 +8,39 @@
 }
 
 
+
+
 <head>
     <meta charset="utf-8">
     <title>Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-    @*    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">*@
+    @* <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/style.css" />
+
+
 
     <style>
         .create-container {
             background-color: white;
             height: 100vw;
         }
+
         .table-wrapper {
             padding-left: 20px;
             padding-right: 20px;
             overflow: auto;
         }
+
         .form-wrapper {
             height: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
+
 
         .form-group {
             display: flex;
@@ -40,9 +49,13 @@
             padding: 4px;
         }
 
+
+
         .brand-labling {
             color: white;
         }
+
+
 
             .brand-labling img {
                 background-color: white;
@@ -52,19 +65,27 @@
                 margin-left: 20px;
             }
 
+
+
         .body {
             background-color: white;
         }
 
+
+
         .top-menu-wrapper {
             background-color: black;
         }
+
+
 
         .control-label {
             color: black;
         }
     </style>
 </head>
+
+
 
 <body>
     <!-- Navbar -->
@@ -88,9 +109,13 @@
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Boatloc">Boat Location</a></li>
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
 
+
+
                     <li><a class="list-menu" asp-area="" asp-controller="Home" asp-action="About_us">About Us</a></li>
                 </ul>
             </div>
+
+
 
         </div>
     </div>
@@ -117,34 +142,44 @@
                 else
                 {
 
+
+
                     @foreach (var p in Model)
                     {
-            <tr>
-                <td>@p.company_id</td>
-                <td>@p.company_url</td>
-                <td>@p.company</td>
-                <td>
-                @*@using (Html.BeginForm("Zipdetails", "Home"))*@
-                <a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a></td>
+                        <tr>
+                            <td>@p.company_id</td>
+                            <td>@p.company_url</td>
+                            <td>@p.company</td>
+                            <td>
+                                @*@using (Html.BeginForm("Zipdetails", "Home"))*@
+                                <a asp-action="Zipdetails" asp-route-id="@p.zip">@p.zip</a>
+                            </td>
 
-                <td>@p.phone_number</td>
-                <td><a asp-action="Modify" asp-route-id="@p.company_id">Edit</a></td>
-                <!--<td><a asp-action="Delete" asp-route-id="@p.company_id">Delete</a></td>-->
-                <td>
-                    <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
-                        <button>Delete</button>
-                    </form>
-                </td>
-            </tr>
+
+
+                            <td>@p.phone_number</td>
+                            <td><a asp-action="Modify" asp-route-id="@p.company_id">Edit</a></td>
+                            <!--<td><a asp-action="Delete" asp-route-id="@p.company_id">Delete</a></td>-->
+                            <td>
+                                <form asp-action="Delete" method="post" asp-route-id="@p.company_id">
+                                    <button>Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+
+
 
                     }
                 }
             </tbody>
         </table>
 
+
+
         <div>
+
+
 
             <a asp-action="Index">Back to List</a>
         </div>
 </body>
-
